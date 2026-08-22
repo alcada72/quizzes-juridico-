@@ -1,3 +1,4 @@
+import { MainCard } from "@/components/home/mainCard";
 import { Quiz_Menu, QuizMenuKey } from "@/constants/quiz_menu";
 import { router, useLocalSearchParams } from "expo-router";
 import { Pressable, ScrollView, Text, View } from "react-native";
@@ -37,7 +38,8 @@ export default function Page() {
         showsVerticalScrollIndicator={false}
         contentContainerClassName="px-5 pt-8 pb-28"
       >
-        <View className="mb-4">
+        <MainCard resumeId={id} />
+        <View className="my-4">
           <Text className="text-xl font-bold text-slate-900">Blocos</Text>
 
           <Text className="mt-1 text-sm text-slate-500">

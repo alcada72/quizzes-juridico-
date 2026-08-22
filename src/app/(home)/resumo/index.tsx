@@ -1,88 +1,53 @@
 import colors from "@/constants/colors";
-import { resumoCGT } from "@/constants/questionst_cgt/resume";
-
+import { SummaryItem } from "@/constants/questionst_cgt/resume/types";
+import { Resumos } from "@/constants/resumos";
 import { Feather } from "@expo/vector-icons";
+import { useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useMemo, useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 
-type Filter = any | "all";
+type FilterType =
+  "all" | "prazos" | "juros" | "percentagens" | "valores" | "procedimentos";
 
-const filters: {
-  id: Filter;
+interface FilterOption {
+  id: FilterType;
   label: string;
   icon: keyof typeof Feather.glyphMap;
-}[] = [
-  {
-    id: "all",
-    label: "Todos",
-    icon: "grid",
-  },
-  {
-    id: "prazos",
-    label: "Prazos",
-    icon: "clock",
-  },
-  {
-    id: "juros",
-    label: "Juros",
-    icon: "percent",
-  },
-  {
-    id: "percentagens",
-    label: "Multas",
-    icon: "bar-chart-2",
-  },
-  {
-    id: "valores",
-    label: "Valores",
-    icon: "dollar-sign",
-  },
+}
+
+const filters: FilterOption[] = [
+  { id: "all", label: "Todos", icon: "grid" },
+  { id: "prazos", label: "Prazos", icon: "clock" },
+  { id: "juros", label: "Juros", icon: "percent" },
+  { id: "percentagens", label: "Multas", icon: "bar-chart-2" },
+  { id: "valores", label: "Valores", icon: "dollar-sign" },
 ];
 
 const categoryInfo: Record<
-  any,
-  {
-    title: string;
-    icon: keyof typeof Feather.glyphMap;
-  }
+  Exclude<FilterType, "all">,
+  { title: string; icon: keyof typeof Feather.glyphMap }
 > = {
-  prazos: {
-    title: "Prazos",
-    icon: "clock",
-  },
-  juros: {
-    title: "Juros",
-    icon: "percent",
-  },
-  percentagens: {
-    title: "Percentagens",
-    icon: "bar-chart-2",
-  },
-  valores: {
-    title: "Valores",
-    icon: "dollar-sign",
-  },
-  procedimentos: {
-    title: "Procedimentos",
-    icon: "file-text",
-  },
+  prazos: { title: "Prazos", icon: "clock" },
+  juros: { title: "Juros", icon: "percent" },
+  percentagens: { title: "Percentagens", icon: "bar-chart-2" },
+  valores: { title: "Valores", icon: "dollar-sign" },
+  procedimentos: { title: "Procedimentos", icon: "file-text" },
 };
 
 export default function Page() {
-  const [activeFilter, setActiveFilter] = useState<Filter>("all");
+  const { resumeId } = useLocalSearchParams<{ resumeId: string }>();
+  const [activeFilter, setActiveFilter] = useState<FilterType>("all");
   const [search, setSearch] = useState("");
 
   const filteredItems = useMemo(() => {
     const query = search.trim().toLowerCase();
 
-    return resumoCGT.items.filter((item) => {
+    return Resumos[resumeId].items.filter((item) => {
       const matchesCategory =
         activeFilter === "all" || item.category === activeFilter;
 
-      if (!query) {
-        return matchesCategory;
-      }
+      if (!query) return matchesCategory;
 
       const searchableText = [
         item.label,
@@ -97,24 +62,24 @@ export default function Page() {
 
       return matchesCategory && searchableText.includes(query);
     });
-  }, [activeFilter, search]);
+  }, [activeFilter, resumeId, search]);
 
   const groupedItems = useMemo(() => {
     if (activeFilter !== "all") {
       return [
         {
-          category: activeFilter,
+          category: activeFilter as Exclude<FilterType, "all">,
           items: filteredItems,
         },
       ];
     }
 
-    const groups = new Map<any, typeof filteredItems>();
+    const groups = new Map<Exclude<FilterType, "all">, typeof filteredItems>();
 
     filteredItems.forEach((item) => {
-      const current = groups.get(item.category) ?? [];
-
-      groups.set(item.category, [...current, item]);
+      const cat = item.category as Exclude<FilterType, "all">;
+      const current = groups.get(cat) ?? [];
+      groups.set(cat, [...current, item]);
     });
 
     return Array.from(groups.entries()).map(([category, items]) => ({
@@ -125,39 +90,38 @@ export default function Page() {
 
   return (
     <View className="flex-1 bg-slate-50">
-      <StatusBar backgroundColor={colors.primary} style="light" />
-      {/* Header background */}
+      <StatusBar style="dark" />
+
+      {/* Header com curva de fundo */}
       <View
-        className="absolute hidden left-0 top-0 h-[260px] w-full"
+        className="absolute left-0 top-0 h-[220px] w-full"
         style={{
           backgroundColor: colors.primary,
-          borderBottomLeftRadius: 90,
-          borderBottomRightRadius: 90,
+          borderBottomLeftRadius: 36,
+          borderBottomRightRadius: 36,
         }}
       />
 
-      {/* Header */}
-      <View className="z-10 px-4 mt-5">
+      {/* Cabeçalho */}
+      <View className="z-10 px-5 pt-12">
         <View className="flex-row items-center justify-between">
           <View className="flex-1 pr-4">
-            <Text className="text-3xl font-black text-blue-700">
+            <Text className="text-3xl font-black text-white">
               Revisão rápida
             </Text>
-
-            <Text className="mt-1 text-base font-medium text-blue-500">
-              Consulte os pontos mais importantes do CGT
+            <Text className="mt-1 text-sm font-medium text-blue-100">
+              Consulte os pontos mais importantes do {Resumos[resumeId].title}
             </Text>
           </View>
 
-          <View className="size-12 items-center justify-center rounded-2xl bg-white/15">
-            <Feather name="book-open" size={24} color={colors.white} />
+          <View className="size-12 items-center justify-center rounded-2xl bg-white/20">
+            <Feather name="book-open" size={22} color={colors.white} />
           </View>
         </View>
 
-        {/* Search */}
-        <View className="mt-6 flex-row items-center rounded-2xl px-4 bg-white px-4 py-3">
+        {/* Campo de Pesquisa */}
+        <View className="mt-6 flex-row items-center rounded-2xl bg-white px-4 py-3 shadow-sm border border-slate-100">
           <Feather name="search" size={20} color="#64748b" />
-
           <TextInput
             value={search}
             onChangeText={setSearch}
@@ -166,44 +130,41 @@ export default function Page() {
             className="ml-3 flex-1 text-base text-slate-800"
             returnKeyType="search"
           />
-
           {search.length > 0 && (
             <Pressable
               onPress={() => setSearch("")}
               className="size-7 items-center justify-center rounded-full bg-slate-100"
             >
-              <Feather name="x" size={16} color="#475569" />
+              <Feather name="x" size={14} color="#475569" />
             </Pressable>
           )}
         </View>
       </View>
 
-      {/* Filters */}
-      <View className="mt-5 px-4 pb-2">
+      {/* Filtros em Carrossel */}
+      <View className="mt-4 px-5">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerClassName="gap-2"
+          contentContainerStyle={{ gap: 8 }}
         >
           {filters.map((filter) => {
             const active = activeFilter === filter.id;
-
             return (
               <Pressable
                 key={filter.id}
                 onPress={() => setActiveFilter(filter.id)}
-                className={`flex-row items-center rounded-full px-4 py-2.5 ${
+                className={`flex-row items-center rounded-full px-4 py-2.5 shadow-sm ${
                   active ? "bg-blue-600" : "border border-slate-200 bg-white"
                 }`}
               >
                 <Feather
                   name={filter.icon}
-                  size={16}
+                  size={15}
                   color={active ? colors.white : "#475569"}
                 />
-
                 <Text
-                  className={`ml-2 font-bold ${
+                  className={`ml-2 text-sm font-bold ${
                     active ? "text-white" : "text-slate-600"
                   }`}
                 >
@@ -215,41 +176,43 @@ export default function Page() {
         </ScrollView>
       </View>
 
+      {/* Conteúdo Principal */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
-        contentContainerClassName="px-4 pb-10"
+        contentContainerClassName="px-5 pb-12 pt-4"
       >
-        {/* Counter */}
-        <View className="mt-6 flex-row items-center justify-between">
+        {/* Totalizador */}
+        <View className="flex-row items-center justify-between">
           <View>
-            <Text className="text-2xl font-black text-slate-800">
+            <Text className="text-xl font-black text-slate-800">
               {activeFilter === "all"
                 ? "Resumo do CGT"
-                : categoryInfo[activeFilter].title}
+                : categoryInfo[activeFilter]?.title}
             </Text>
-
-            <Text className="mt-1 text-sm text-slate-500">
+            <Text className="mt-0.5 text-xs font-medium text-slate-500">
               {filteredItems.length}{" "}
-              {filteredItems.length === 1 ? "item" : "itens"} encontrados
+              {filteredItems.length === 1
+                ? "item encontrado"
+                : "itens encontrados"}
             </Text>
           </View>
 
-          <View className="size-11 items-center justify-center rounded-2xl bg-blue-100">
+          <View className="size-10 items-center justify-center rounded-xl bg-blue-50">
             <Feather
               name={
                 activeFilter === "all"
                   ? "layers"
-                  : categoryInfo[activeFilter].icon
+                  : categoryInfo[activeFilter]?.icon
               }
-              size={21}
+              size={18}
               color="#2563eb"
             />
           </View>
         </View>
 
-        {/* Content */}
-        <View className="mt-5">
+        {/* Lista dos Grupos */}
+        <View className="mt-4">
           {filteredItems.length === 0 ? (
             <EmptyState
               search={search}
@@ -259,50 +222,45 @@ export default function Page() {
               }}
             />
           ) : (
-            groupedItems.map((group) => (
-              <View key={group.category} className="mb-6">
-                {/* Category title */}
-                {activeFilter === "all" && (
-                  <View className="mb-3 flex-row items-center">
-                    <View className="size-9 items-center justify-center rounded-xl bg-blue-100">
-                      <Feather
-                        name={categoryInfo[group.category].icon}
-                        size={18}
-                        color="#2563eb"
-                      />
+            groupedItems.map((group) => {
+              const info = categoryInfo[group.category];
+              return (
+                <View key={group.category} className="mb-5">
+                  {activeFilter === "all" && info && (
+                    <View className="mb-3 flex-row items-center">
+                      <View className="size-8 items-center justify-center rounded-lg bg-blue-100">
+                        <Feather name={info.icon} size={16} color="#2563eb" />
+                      </View>
+                      <Text className="ml-2.5 text-base font-extrabold text-slate-800">
+                        {info.title}
+                      </Text>
                     </View>
+                  )}
 
-                    <Text className="ml-3 text-lg font-black text-slate-800">
-                      {categoryInfo[group.category].title}
-                    </Text>
-                  </View>
-                )}
-
-                {/* Cards */}
-                {group.items.map((item) => (
-                  <SummaryCard key={item.id} item={item} />
-                ))}
-              </View>
-            ))
+                  {group.items.map((item) => (
+                    <SummaryCard key={item.id} item={item} />
+                  ))}
+                </View>
+              );
+            })
           )}
         </View>
 
-        {/* Footer tip */}
+        {/* Dica de estudo */}
         {filteredItems.length > 0 && (
-          <View className="mt-2 rounded-3xl bg-blue-600 p-5">
+          <View className="mt-2 rounded-2xl bg-blue-600 p-4 shadow-sm">
             <View className="flex-row items-start">
-              <View className="mr-4 size-11 items-center justify-center rounded-2xl bg-white/15">
-                <Feather name="info" size={21} color={colors.white} />
+              <View className="mr-3 size-10 items-center justify-center rounded-xl bg-white/20">
+                <Feather name="zap" size={18} color={colors.white} />
               </View>
 
               <View className="flex-1">
-                <Text className="text-base font-black text-white">
-                  Dica de estudo
+                <Text className="text-sm font-black text-white">
+                  Dica de Estudo
                 </Text>
-
-                <Text className="mt-1 text-sm leading-5 text-blue-100">
-                  Tenta memorizar primeiro os números e depois associa cada um
-                  ao respectivo artigo do Código Geral Tributário.
+                <Text className="mt-1 text-xs leading-4 text-blue-100">
+                  Memorize primeiro os valores numéricos principais e associe
+                  aos artigos correspondentes do Código Geral Tributário.
                 </Text>
               </View>
             </View>
@@ -313,46 +271,40 @@ export default function Page() {
   );
 }
 
-function SummaryCard({ item }: { item: (typeof resumoCGT.items)[number] }) {
+function SummaryCard({ item }: { item: SummaryItem }) {
   return (
-    <View className="mb-3 overflow-hidden rounded-3xl border border-slate-200 bg-white">
-      <View className="p-5">
-        {/* Label */}
-        <View className="flex-row items-start justify-between">
-          <Text className="flex-1 pr-4 text-base font-bold leading-6 text-slate-700">
-            {item.label}
-          </Text>
-
-          {item.article && (
-            <View className="rounded-lg bg-slate-100 px-2.5 py-1.5">
-              <Text className="text-xs font-bold text-slate-500">
-                {item.article}
-              </Text>
-            </View>
-          )}
-        </View>
-
-        {/* Main value */}
-        <Text className="mt-4 text-3xl font-black text-blue-600">
-          {item.value}
+    <View className="mb-3 overflow-hidden rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
+      <View className="flex-row items-start justify-between">
+        <Text className="flex-1 pr-3 text-sm font-bold leading-5 text-slate-700">
+          {item.label}
         </Text>
 
-        {/* Description */}
-        {item.description && (
-          <View className="mt-3 flex-row items-start">
-            <Feather
-              name="info"
-              size={15}
-              color="#94a3b8"
-              style={{ marginTop: 3, marginRight: 7 }}
-            />
-
-            <Text className="flex-1 text-sm leading-5 text-slate-500">
-              {item.description}
+        {item.article && (
+          <View className="rounded-md bg-slate-100 px-2 py-1">
+            <Text className="text-[11px] font-bold text-slate-600">
+              {item.article}
             </Text>
           </View>
         )}
       </View>
+
+      <Text className="mt-2 text-2xl font-black text-blue-600">
+        {item.value}
+      </Text>
+
+      {item.description && (
+        <View className="mt-2 flex-row items-start pt-2 border-t border-slate-50">
+          <Feather
+            name="info"
+            size={13}
+            color="#94a3b8"
+            style={{ marginTop: 2, marginRight: 6 }}
+          />
+          <Text className="flex-1 text-xs leading-4 text-slate-500">
+            {item.description}
+          </Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -365,25 +317,25 @@ function EmptyState({
   onClear: () => void;
 }) {
   return (
-    <View className="items-center rounded-3xl border border-slate-200 bg-white px-6 py-10">
-      <View className="size-16 items-center justify-center rounded-3xl bg-slate-100">
-        <Feather name="search" size={28} color="#94a3b8" />
+    <View className="items-center rounded-2xl border border-slate-100 bg-white px-6 py-8 shadow-sm">
+      <View className="size-14 items-center justify-center rounded-2xl bg-slate-100">
+        <Feather name="search" size={24} color="#94a3b8" />
       </View>
 
-      <Text className="mt-4 text-xl font-black text-slate-800">
-        Nada encontrado
+      <Text className="mt-3 text-lg font-black text-slate-800">
+        Nenhum resultado
       </Text>
 
-      <Text className="mt-2 text-center text-sm leading-5 text-slate-500">
-        Não encontramos nenhum resumo
-        {search ? ` para "${search}"` : ""}.
+      <Text className="mt-1 text-center text-xs leading-4 text-slate-500">
+        Não encontramos termos correspondentes a{" "}
+        {search ? `"${search}"` : "categoria selecionada"}.
       </Text>
 
       <Pressable
         onPress={onClear}
-        className="mt-5 rounded-2xl bg-blue-600 px-5 py-3"
+        className="mt-4 rounded-xl bg-blue-600 px-4 py-2.5"
       >
-        <Text className="font-bold text-white">Limpar filtros</Text>
+        <Text className="text-xs font-bold text-white">Limpar Filtros</Text>
       </Pressable>
     </View>
   );

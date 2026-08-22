@@ -1,5 +1,4 @@
 import { HeaderHome } from "@/components/home/header";
-import { MainCard } from "@/components/home/mainCard";
 import { ProgressCard } from "@/components/home/progressCard";
 import { Quiz_Menu } from "@/constants/quiz_menu";
 import { getProgress, QuizProgress } from "@/service/points.service";
@@ -32,11 +31,9 @@ export default function HomeScreen() {
     <ScrollView
       overScrollMode="never"
       showsVerticalScrollIndicator={false}
-      contentContainerClassName="px-5 pt-5 pb-28 bg-slate-50"
+      contentContainerClassName="px-5 pt-5 pb-28 flex-1 bg-slate-100"
     >
       <HeaderHome name={username} onNameChange={setUsername} />
-
-      <MainCard />
 
       <ProgressCard
         totalXP={progress?.totalXP || 0}

@@ -3,11 +3,11 @@ import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
-export function MainCard() {
+export function MainCard({ resumeId }: { resumeId: string }) {
   const router = useRouter();
 
   return (
-    <View className="mt-8 overflow-hidden rounded-3xl bg-blue-600 p-6">
+    <View className=" overflow-hidden rounded-3xl bg-blue-600 p-6">
       {/* Badge */}
       <View className="flex-row items-center">
         <View className="mr-2 size-8 items-center justify-center rounded-xl bg-white/15">
@@ -25,7 +25,7 @@ export function MainCard() {
 
       <Text className="mt-3 text-base leading-6 text-indigo-100">
         Revise os principais prazos, juros, percentagens e valores do Código
-        Geral Tributário antes de testar os seus conhecimentos.
+        Antes de testar os seus conhecimentos.
       </Text>
 
       <View className="mt-6 flex-row items-center gap-3">
@@ -40,7 +40,14 @@ export function MainCard() {
 
         <Pressable
           className="flex-row items-center justify-center rounded-2xl border border-white/30 bg-white/10 px-4 py-4 active:opacity-70"
-          onPress={() => router.push("/(home)/resumo")}
+          onPress={() =>
+            router.push({
+              pathname: "/(home)/resumo",
+              params: {
+                resumeId,
+              },
+            })
+          }
         >
           <Feather name="book-open" size={18} color={colors.white} />
 

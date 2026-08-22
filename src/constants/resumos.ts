@@ -3,6 +3,6 @@ import { QuizSummary } from "./questionst_cgt/resume/types";
 import { resumoII } from "./questionst_iia/resume";
 
 export const Resumos: Record<string, QuizSummary> = {
-  "resumo-cgt": resumoCGT,
-  "resumo-ii": resumoII,
-};
+  "Questions_cgt": resumoCGT,
+  "Questions_Iia": resumoII,
+} as const;

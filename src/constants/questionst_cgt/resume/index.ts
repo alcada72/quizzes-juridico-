@@ -2,7 +2,7 @@ import type { QuizSummary } from "./types";
 
 export const resumoCGT: QuizSummary = {
   id: "resumo-cgt",
-  title: "Resumo Rápido",
+  title: "Código Geral Tributário",
   subtitle: "Prazos, juros, percentagens e valores do CGT",
 
   items: [

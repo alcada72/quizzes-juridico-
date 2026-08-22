@@ -2,7 +2,7 @@ import { QuizSummary } from "@/constants/questionst_cgt/resume/types";
 
 export const resumoII: QuizSummary = {
   id: "resumo-ii",
-  title: "Resumo Rápido",
+  title: "Imposto Industria",
   subtitle: "Taxas, prazos, regimes e valores do Imposto Industrial",
 
   items: [
