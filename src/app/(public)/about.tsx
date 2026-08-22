@@ -1,0 +1,254 @@
+import colors from "@/constants/colors";
+import { Feather } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
+import { ScrollView, Text, View } from "react-native";
+
+export default function AboutScreen() {
+  return (
+    <View className="flex-1 bg-slate-50">
+      <StatusBar backgroundColor={colors.primary} style="light" />
+
+      {/* Header */}
+      <View
+        className="bg-blue-600 px-5 pb-8 pt-6"
+        style={{
+          borderBottomLeftRadius: 40,
+          borderBottomRightRadius: 40,
+        }}
+      >
+        <View className="items-center">
+          <View className="size-20 items-center justify-center rounded-3xl bg-white/15">
+            <Feather name="book-open" size={38} color={colors.white} />
+          </View>
+
+          <Text className="mt-4 text-3xl font-black text-white">
+            Sobre o App
+          </Text>
+
+          <Text className="mt-2 text-center text-base font-medium text-blue-100">
+            Aprenda, pratique e revise a legislação tributária angolana.
+          </Text>
+        </View>
+      </View>
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerClassName="px-5 pb-10"
+      >
+        {/* About */}
+        <View className="mt-6 rounded-3xl border border-slate-200 bg-white p-5">
+          <View className="flex-row items-center">
+            <View className="size-11 items-center justify-center rounded-2xl bg-blue-100">
+              <Feather name="info" size={22} color="#2563eb" />
+            </View>
+
+            <Text className="ml-3 text-xl font-black text-slate-800">
+              Sobre a aplicação
+            </Text>
+          </View>
+
+          <Text className="mt-4 text-base leading-6 text-slate-600">
+            Esta aplicação foi desenvolvida para facilitar o estudo e a revisão
+            de conteúdos relacionados à legislação tributária de Angola.
+          </Text>
+
+          <Text className="mt-3 text-base leading-6 text-slate-600">
+            Através de quizzes, resumos e acompanhamento do progresso, podes
+            testar os teus conhecimentos e reforçar os conteúdos mais
+            importantes.
+          </Text>
+        </View>
+
+        {/* Funcionalidades */}
+        <View className="mt-4 rounded-3xl border border-slate-200 bg-white p-5">
+          <Text className="text-xl font-black text-slate-800">
+            O que podes fazer?
+          </Text>
+
+          <Feature
+            icon="help-circle"
+            title="Responder a quizzes"
+            description="Testa os teus conhecimentos através de perguntas de escolha múltipla, verdadeiro ou falso e perguntas abertas."
+          />
+
+          <Feature
+            icon="book-open"
+            title="Consultar resumos"
+            description="Revê rapidamente prazos, taxas, percentagens, valores e outros pontos importantes."
+          />
+
+          <Feature
+            icon="trending-up"
+            title="Acompanhar o progresso"
+            description="Consulta a tua pontuação, XP, respostas corretas e evolução nos quizzes."
+          />
+
+          <Feature
+            icon="clock"
+            title="Desafiar os teus conhecimentos"
+            description="Responde às perguntas dentro do tempo disponível e melhora a tua pontuação."
+          />
+        </View>
+
+        {/* Conteúdos */}
+        <View className="mt-4 rounded-3xl border border-slate-200 bg-white p-5">
+          <Text className="text-xl font-black text-slate-800">
+            Conteúdos disponíveis
+          </Text>
+
+          <View className="mt-4 gap-3">
+            <ContentItem
+              icon="file-text"
+              title="Código Geral Tributário"
+              description="Estudo e revisão dos principais temas do CGT."
+            />
+
+            <ContentItem
+              icon="briefcase"
+              title="Imposto Industrial"
+              description="Conteúdos relacionados com o Imposto Industrial em Angola."
+            />
+          </View>
+        </View>
+
+        {/* Sobre o criador */}
+        <View className="mt-4 rounded-3xl border border-slate-200 bg-white p-5">
+          <View className="flex-row items-center">
+            <View className="size-11 items-center justify-center rounded-2xl bg-blue-100">
+              <Feather name="user" size={22} color="#2563eb" />
+            </View>
+
+            <Text className="ml-3 text-xl font-black text-slate-800">
+              Sobre o criador
+            </Text>
+          </View>
+
+          <View className="mt-5 items-center">
+            {/* Foto/Avatar */}
+            <View className="size-24 items-center justify-center rounded-full bg-blue-600">
+              <Feather name="user" size={42} color={colors.white} />
+            </View>
+
+            <Text className="mt-4 text-2xl font-black text-slate-800">
+              Eng. Joaquim Lofa
+            </Text>
+
+            <Text className="mt-1 text-center text-sm font-medium text-blue-600">
+              Desenvolvedor da aplicação
+            </Text>
+          </View>
+
+          <Text className="mt-5 text-center text-base leading-6 text-slate-600">
+            Esta aplicação nasceu com o objetivo de tornar o estudo da
+            legislação tributária angolana mais simples, prático e acessível.
+          </Text>
+
+          <Text className="mt-3 text-center text-base leading-6 text-slate-600">
+            A ideia é transformar o estudo tradicional em uma experiência mais
+            interativa, permitindo aprender através de quizzes, revisões rápidas
+            e acompanhamento do progresso.
+          </Text>
+
+          {/* Contactos / Links */}
+          <View className="mt-5 flex-row justify-center gap-3">
+            <View className="flex-row items-center rounded-xl bg-slate-100 px-4 py-3">
+              <Feather name="smartphone" size={18} color="#334155" />
+
+              <Text className="ml-2 text-sm font-bold text-slate-700">
+                +244 924 398 742
+              </Text>
+            </View>
+
+            <View className="flex-row items-center rounded-xl bg-slate-100 px-4 py-3">
+              <Feather name="mail" size={18} color="#334155" />
+
+              <Text className="ml-2 text-sm font-bold text-slate-700">
+                joaquinlofa@gmail.com
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Aviso */}
+        <View className="mt-4 rounded-3xl bg-yellow-50 p-5">
+          <View className="flex-row items-start">
+            <View className="mr-3 size-10 items-center justify-center rounded-2xl bg-yellow-100">
+              <Feather name="alert-circle" size={21} color="#ca8a04" />
+            </View>
+
+            <View className="flex-1">
+              <Text className="text-base font-black text-yellow-800">
+                Nota importante
+              </Text>
+
+              <Text className="mt-1 text-sm leading-5 text-yellow-700">
+                Esta aplicação tem finalidade educativa. Para questões jurídicas
+                ou tributárias concretas, consulta sempre a legislação oficial e
+                fontes competentes.
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Version */}
+        <View className="mt-6 items-center">
+          <Text className="text-sm font-bold text-slate-500">Versão 1.0.0</Text>
+
+          <Text className="mt-1 text-xs text-slate-400">
+            Desenvolvido para fins educativos
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+
+function Feature({
+  icon,
+  title,
+  description,
+}: {
+  icon: keyof typeof Feather.glyphMap;
+  title: string;
+  description: string;
+}) {
+  return (
+    <View className="mt-5 flex-row items-start">
+      <View className="size-10 items-center justify-center rounded-xl bg-blue-50">
+        <Feather name={icon} size={19} color="#2563eb" />
+      </View>
+
+      <View className="ml-3 flex-1">
+        <Text className="text-base font-bold text-slate-800">{title}</Text>
+
+        <Text className="mt-1 text-sm leading-5 text-slate-500">
+          {description}
+        </Text>
+      </View>
+    </View>
+  );
+}
+
+function ContentItem({
+  icon,
+  title,
+  description,
+}: {
+  icon: keyof typeof Feather.glyphMap;
+  title: string;
+  description: string;
+}) {
+  return (
+    <View className="flex-row items-center rounded-2xl bg-slate-50 p-4">
+      <View className="size-11 items-center justify-center rounded-xl bg-blue-100">
+        <Feather name={icon} size={21} color="#2563eb" />
+      </View>
+
+      <View className="ml-3 flex-1">
+        <Text className="font-bold text-slate-800">{title}</Text>
+
+        <Text className="mt-1 text-sm text-slate-500">{description}</Text>
+      </View>
+    </View>
+  );
+}

@@ -136,12 +136,12 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
       </View>
 
       <Pressable
-        onPress={() => router.push("/profile")}
+        onPress={() => router.push("/(public)/about")}
         accessibilityRole="button"
         accessibilityLabel="Abrir perfil"
-        className="size-12 items-center hidden justify-center rounded-full border-2 border-indigo-600 bg-indigo-100 active:opacity-70"
+        className=" items-center justify-center   active:opacity-70"
       >
-        <FontAwesome name="user" size={25} color={colors.primary} />
+        <FontAwesome name="info-circle" size={25} color={colors.primary} />
       </Pressable>
     </View>
   );
