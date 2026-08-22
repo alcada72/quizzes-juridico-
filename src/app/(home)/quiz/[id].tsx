@@ -1,19 +1,18 @@
 import colors from "@/constants/colors";
-import { Questions } from "@/constants/questionst";
-import { QuizBlocoTypes } from "@/constants/questionst/types";
+import { Quiz_Menu } from "@/constants/quiz_menu";
 import { completeQuiz } from "@/service/points.service";
 import { Feather } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
-    AppState,
-    AppStateStatus,
-    Pressable,
-    ScrollView,
-    Text,
-    TextInput,
-    View,
+  AppState,
+  AppStateStatus,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 
 const QUESTION_TIME = 20;
@@ -21,47 +20,50 @@ const QUESTION_TIME = 20;
 type AnswerStatus = "idle" | "correct" | "wrong" | "timeout";
 
 export default function Page() {
-  const { id } = useLocalSearchParams<{ id: QuizBlocoTypes }>();
+  const { id } = useLocalSearchParams<{ id: string }>();
+
+  /*
+   * Procura o bloco dentro de todos os questionários:
+   *
+   * - Código Geral Tributário
+   * - Imposto Industrial em Angola
+   */
+  const quiz = useMemo(() => {
+    for (const menu of Object.values(Quiz_Menu)) {
+      const bloco = menu.questions_quis[id];
+
+      if (bloco) {
+        return bloco;
+      }
+    }
+
+    return undefined;
+  }, [id]);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-
   const [openAnswer, setOpenAnswer] = useState("");
-
   const [score, setScore] = useState(0);
-
   const [correctAnswers, setCorrectAnswers] = useState(0);
-
   const [wrongAnswers, setWrongAnswers] = useState(0);
-
   const [timeRemaining, setTimeRemaining] = useState(QUESTION_TIME);
-
   const [answerStatus, setAnswerStatus] = useState<AnswerStatus>("idle");
-
   const [isAnswering, setIsAnswering] = useState(false);
-
   const [isPaused, setIsPaused] = useState(false);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
   const appStateRef = useRef<AppStateStatus>(AppState.currentState);
 
-  const questions = Questions[id].questions;
-
+  const questions = quiz?.questions ?? [];
   const totalQuestions = questions.length;
-
-  const currentQuestion = questions[currentQuestionIndex];
-
+  const currentQuestion = questions[currentQuestionIndex]!;
   const currentNumber = currentQuestionIndex + 1;
-
   const progress = (currentNumber / totalQuestions) * 100;
 
   const questionPoints = useMemo(() => {
     if (timeRemaining <= 0) return 0;
 
     const base = 100;
-
     const timeBonus = timeRemaining * 5;
 
     return base + timeBonus;
@@ -99,7 +101,7 @@ export default function Page() {
         },
       });
     },
-    [clearTimer, totalQuestions],
+    [clearTimer, id, totalQuestions],
   );
 
   const goToNextQuestion = useCallback(
@@ -108,7 +110,6 @@ export default function Page() {
 
       if (currentQuestionIndex >= totalQuestions - 1) {
         finishQuiz(newScore, newCorrect, newWrong);
-
         return;
       }
 
@@ -126,7 +127,6 @@ export default function Page() {
   const submitAnswer = useCallback(
     (answer?: string) => {
       if (isAnswering) return;
-
       if (answerStatus !== "idle") return;
 
       let userAnswer = answer ?? selectedAnswer;
@@ -134,14 +134,10 @@ export default function Page() {
       if (currentQuestion.type === "open") {
         userAnswer = openAnswer.trim();
 
-        if (!userAnswer) {
-          return;
-        }
+        if (!userAnswer) return;
       }
 
-      if (!userAnswer) {
-        return;
-      }
+      if (!userAnswer) return;
 
       setIsAnswering(true);
 
@@ -172,25 +168,26 @@ export default function Page() {
       const newWrong = wrongAnswers + (isCorrect ? 0 : 1);
 
       const points = isCorrect ? questionPoints : 0;
-
       const newScore = score + points;
 
       if (isCorrect) {
         setAnswerStatus("correct");
         setCorrectAnswers(newCorrect);
         setScore(newScore);
-      } else {
-        setAnswerStatus("wrong");
-        setWrongAnswers(newWrong);
+
         setTimeout(() => {
           goToNextQuestion(newScore, newCorrect, newWrong);
-        }, 5000);
+        }, 1200);
+
         return;
       }
 
+      setAnswerStatus("wrong");
+      setWrongAnswers(newWrong);
+
       setTimeout(() => {
         goToNextQuestion(newScore, newCorrect, newWrong);
-      }, 1200);
+      }, 5000);
     },
     [
       answerStatus,
@@ -207,9 +204,7 @@ export default function Page() {
   );
 
   const handleTimeout = useCallback(() => {
-    if (answerStatus !== "idle") {
-      return;
-    }
+    if (answerStatus !== "idle") return;
 
     setAnswerStatus("timeout");
     setIsAnswering(true);
@@ -226,9 +221,7 @@ export default function Page() {
   useEffect(() => {
     if (isPaused) return;
 
-    if (answerStatus !== "idle") {
-      return;
-    }
+    if (answerStatus !== "idle") return;
 
     clearTimer();
 
@@ -248,17 +241,6 @@ export default function Page() {
 
     return clearTimer;
   }, [answerStatus, clearTimer, handleTimeout, isPaused]);
-
-  /**
-   * -------------------------------------------------------
-   * APP STATE
-   *
-   * Pausa o quiz quando o usuário:
-   * - minimiza o app
-   * - abre outra aplicação
-   * - bloqueia o telefone
-   * -------------------------------------------------------
-   */
 
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextState) => {
@@ -288,6 +270,17 @@ export default function Page() {
     };
   }, [clearTimer]);
 
+  /*
+   * Se o bloco não existir
+   */
+  if (!quiz) {
+    return (
+      <View className="flex-1 items-center justify-center bg-blue-600">
+        <Text className="text-3xl font-bold text-white">Bloco inválido</Text>
+      </View>
+    );
+  }
+
   const selectMultipleChoice = (optionId: string) => {
     if (isAnswering) return;
 
@@ -303,7 +296,7 @@ export default function Page() {
   const getAnswerStyle = (optionId: string) => {
     if (answerStatus === "idle") {
       if (selectedAnswer === optionId) {
-        return "border-indigo-600 bg-indigo-50";
+        return "border-blue-600 bg-blue-50";
       }
 
       return "border-slate-200 bg-white";
@@ -320,17 +313,10 @@ export default function Page() {
     return "border-slate-200 bg-white";
   };
 
-  if (!currentQuestion) {
-    return (
-      <View className="flex-1 bg-blue-600 items-center justify-center">
-        <Text className="text-3xl font-bold text-nowrap">Bloco Invalido</Text>
-      </View>
-    );
-  }
   if (isPaused) {
     return (
-      <View className="flex-1 bg-blue-600 items-center justify-center">
-        <Text className="text-3xl font-bold text-nowrap">Jogo em Pausa </Text>
+      <View className="flex-1 items-center justify-center bg-blue-600">
+        <Text className="text-3xl font-bold text-white">Jogo em Pausa</Text>
       </View>
     );
   }
@@ -339,7 +325,6 @@ export default function Page() {
     <View className="flex-1 bg-slate-50">
       <StatusBar backgroundColor={colors.primary} style="light" />
 
-      {/* Header Background */}
       <View
         className="absolute left-0 top-0 h-[250px] w-full"
         style={{
@@ -356,7 +341,6 @@ export default function Page() {
       >
         {/* Progress */}
         <View className="z-10 flex-row items-center gap-3">
-          {/* Counter */}
           <View className="flex-row items-center gap-1.5 rounded-xl bg-slate-800 px-3 py-2">
             <Feather size={17} name="help-circle" color={colors.white} />
 
@@ -371,7 +355,6 @@ export default function Page() {
             </Text>
           </View>
 
-          {/* Progress bar */}
           <View className="h-3 flex-1 overflow-hidden rounded-full bg-blue-200">
             <View
               className="h-full rounded-full bg-yellow-400"
@@ -381,7 +364,6 @@ export default function Page() {
             />
           </View>
 
-          {/* Score */}
           <View className="flex-row items-center gap-1.5 rounded-xl bg-yellow-400 px-3 py-2">
             <Feather size={17} name="award" color={colors.black} />
 
@@ -390,8 +372,7 @@ export default function Page() {
         </View>
 
         {/* Question */}
-        <View className="mt-16 rounded-3xl bg-indigo-600 px-5 pb-6">
-          {/* Timer */}
+        <View className="mt-16 rounded-3xl bg-blue-600 px-5 pb-6">
           <View className="-mt-12 self-center rounded-full border-[8px] border-blue-600 bg-slate-800 p-2">
             <View className="size-24 items-center justify-center rounded-full border-4 border-yellow-400">
               <Text className="text-3xl font-black text-white">
@@ -404,17 +385,16 @@ export default function Page() {
             </View>
           </View>
 
-          {/* Question Content */}
           <View className="mt-5 items-center">
             <Text className="text-3xl font-black text-white">
               Pergunta {String(currentNumber).padStart(2, "0")}
             </Text>
 
-            <Text className="mt-1 text-center text-base font-medium text-indigo-200">
-              {Questions[id].title}
+            <Text className="mt-1 text-center text-base font-medium text-blue-200">
+              {quiz.title}
             </Text>
 
-            <View className="my-5 h-px w-full bg-indigo-400" />
+            <View className="my-5 h-px w-full bg-blue-400" />
 
             <Text className="text-center text-xl font-bold leading-7 text-white">
               {currentQuestion.question}
@@ -422,6 +402,7 @@ export default function Page() {
           </View>
         </View>
 
+        {/* Multiple choice */}
         {currentQuestion.type === "multiple_choice" && (
           <View className="mt-6 gap-3">
             {currentQuestion.options?.map((option) => (
@@ -433,8 +414,8 @@ export default function Page() {
                   option.id,
                 )}`}
               >
-                <View className="mr-4 size-10 items-center justify-center rounded-xl bg-indigo-100">
-                  <Text className="text-lg font-black text-indigo-600">
+                <View className="mr-4 size-10 items-center justify-center rounded-xl bg-blue-100">
+                  <Text className="text-lg font-black text-blue-600">
                     {option.label.replace(")", "")}
                   </Text>
                 </View>
@@ -458,6 +439,7 @@ export default function Page() {
           </View>
         )}
 
+        {/* True / False */}
         {currentQuestion.type === "true_false" && (
           <View className="mt-6 gap-3">
             {[
@@ -472,20 +454,20 @@ export default function Page() {
                 icon: "x-circle" as const,
               },
             ].map((option) => {
-              const id = String(option.value);
+              const optionId = String(option.value);
 
               return (
                 <Pressable
-                  key={id}
+                  key={optionId}
                   disabled={isAnswering}
                   onPress={() => selectTrueFalse(option.value)}
                   className={`flex-row items-center rounded-2xl border p-5 ${
-                    selectedAnswer === id
-                      ? "border-indigo-600 bg-indigo-50"
+                    selectedAnswer === optionId
+                      ? "border-blue-600 bg-blue-50"
                       : "border-slate-200 bg-white"
                   }`}
                 >
-                  <View className="mr-4 size-11 items-center justify-center rounded-full bg-indigo-100">
+                  <View className="mr-4 size-11 items-center justify-center rounded-full bg-blue-100">
                     <Feather
                       name={option.icon}
                       size={23}
@@ -502,6 +484,7 @@ export default function Page() {
           </View>
         )}
 
+        {/* Open answer */}
         {currentQuestion.type === "open" && (
           <View className="mt-6">
             <TextInput
@@ -566,7 +549,7 @@ export default function Page() {
           </View>
         )}
 
-        {/* Submit / Next */}
+        {/* Submit */}
         <Pressable
           disabled={
             isAnswering ||
@@ -579,7 +562,7 @@ export default function Page() {
             (currentQuestion.type === "open" && !openAnswer.trim()) ||
             (currentQuestion.type !== "open" && !selectedAnswer)
               ? "bg-slate-300"
-              : "bg-indigo-600"
+              : "bg-blue-600"
           }`}
         >
           <Text className="text-lg font-bold text-white">
@@ -595,17 +578,6 @@ export default function Page() {
             }}
           />
         </Pressable>
-
-        {/* Paused */}
-        {isPaused && (
-          <View className="mt-4 flex-row items-center justify-center">
-            <Feather name="pause-circle" size={17} color="#64748b" />
-
-            <Text className="ml-2 text-sm font-medium text-slate-500">
-              Quiz pausado
-            </Text>
-          </View>
-        )}
       </ScrollView>
     </View>
   );

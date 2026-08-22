@@ -1,4 +1,4 @@
-import type { Quiz } from "../types";
+import type { Quiz } from "../../types";
 
 const quizBloco8: Quiz = {
   id: "cgt-bloco-08",
@@ -13,12 +13,34 @@ const quizBloco8: Quiz = {
     {
       id: "8.1",
       number: 1,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Distingue crime tributário de transgressão tributária quanto à punibilidade da negligência.",
-      answer:
-        "No crime tributário, só é punível a conduta praticada com dolo. Na transgressão tributária, a negligência é sempre punível, salvo disposição legal em contrário.",
-      answerLabel: "Resposta esperada",
+        "Qual das seguintes afirmações distingue correctamente crime tributário de transgressão tributária quanto à punibilidade da negligência?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "No crime tributário e na transgressão tributária, apenas o dolo é punível.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "No crime tributário, só é punível o dolo; na transgressão tributária, a negligência é sempre punível, salvo disposição legal em contrário.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "No crime tributário, a negligência é sempre punível; na transgressão tributária, apenas o dolo é punível.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Tanto o dolo como a negligência são sempre puníveis nos crimes e nas transgressões tributárias.",
+        },
+      ],
+      answer: "b",
+      answerLabel:
+        "b) No crime tributário, só é punível o dolo; na transgressão tributária, a negligência é sempre punível, salvo disposição legal em contrário.",
       explanation:
         "Nos termos do Art. 144.º/2 e 3, os crimes tributários exigem dolo, enquanto a negligência é punível nas transgressões tributárias, salvo disposição em contrário.",
     },
@@ -70,11 +92,33 @@ const quizBloco8: Quiz = {
     {
       id: "8.4",
       number: 4,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Este prazo amplia-se para quantos anos quando a infracção constitui crime tributário?",
-      answer: "10 anos.",
-      answerLabel: "10 anos",
+        "Quando a infracção constitui crime tributário, o prazo de prescrição do procedimento para aplicação da pena amplia-se para:",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "7 anos",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "8 anos",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "10 anos",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "15 anos",
+        },
+      ],
+      answer: "c",
+      answerLabel: "c) 10 anos",
       explanation: "Art. 151.º/2.",
     },
 
@@ -126,11 +170,34 @@ const quizBloco8: Quiz = {
     {
       id: "8.7",
       number: 7,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Segundo o Art. 155.º/4, qual a percentagem de multa aplicável pelo não pagamento de qualquer prestação ou totalidade do tributo dentro do prazo legal, e qual o seu valor mínimo?",
-      answer: "35% do tributo em falta, com valor mínimo de Kz 5.000,00.",
-      answerLabel: "35% do tributo em falta; mínimo de Kz 5.000,00",
+        "Segundo o Art. 155.º/4, qual é a percentagem da multa aplicável pelo não pagamento de qualquer prestação ou totalidade do tributo dentro do prazo legal, e qual o seu valor mínimo?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "10% do tributo em falta, com mínimo de Kz 2.000,00",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "20% do tributo em falta, com mínimo de Kz 5.000,00",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "35% do tributo em falta, com mínimo de Kz 5.000,00",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "50% do tributo em falta, com mínimo de Kz 10.000,00",
+        },
+      ],
+      answer: "c",
+      answerLabel:
+        "c) 35% do tributo em falta, com mínimo de Kz 5.000,00",
       explanation:
         "A multa corresponde a 35% do tributo em falta, com um valor mínimo de Kz 5.000,00.",
     },
@@ -171,11 +238,33 @@ const quizBloco8: Quiz = {
     {
       id: "8.9",
       number: 9,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "E se o pagamento ocorrer em resultado de uma acção inspectiva (Art. 166.º), qual a percentagem de redução?",
-      answer: "20% do montante mínimo aplicável.",
-      answerLabel: "20% do montante mínimo aplicável",
+        "Se o pagamento da multa ocorrer em resultado de uma acção inspectiva, nos termos do Art. 166.º, qual é a percentagem do montante mínimo aplicável?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "10%",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "20%",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "30%",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "50%",
+        },
+      ],
+      answer: "b",
+      answerLabel: "b) 20% do montante mínimo aplicável",
       explanation: "Art. 166.º/1.",
     },
 

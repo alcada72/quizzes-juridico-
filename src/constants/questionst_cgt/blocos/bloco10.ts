@@ -1,4 +1,4 @@
-import type { Quiz } from "../types";
+import type { Quiz } from "../../types";
 
 const quizBloco10: Quiz = {
   id: "cgt-bloco-10",
@@ -58,12 +58,35 @@ const quizBloco10: Quiz = {
     {
       id: "10.3",
       number: 3,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Qual o prazo, em dias, para o arguido deduzir defesa em processo de transgressão (Art. 211.º)?",
-      answer: "20 dias.",
-      answerLabel: "20 dias",
-      explanation: "O arguido dispõe de 20 dias para deduzir defesa.",
+        "Qual é o prazo, em dias, para o arguido deduzir defesa em processo de transgressão, nos termos do Art. 211.º?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "10 dias",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "15 dias",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "20 dias",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "30 dias",
+        },
+      ],
+      answer: "c",
+      answerLabel: "c) 20 dias",
+      explanation:
+        "Nos termos do Art. 211.º, o arguido dispõe de 20 dias para deduzir defesa.",
     },
 
     {
@@ -80,12 +103,35 @@ const quizBloco10: Quiz = {
     {
       id: "10.5",
       number: 5,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Qual o prazo para a instrução do processo de transgressão ser concluída?",
-      answer: "30 dias, salvo motivo justificado.",
-      answerLabel: "30 dias, salvo motivo justificado",
-      explanation: "Art. 209.º.",
+        "Qual é o prazo para a instrução do processo de transgressão ser concluída?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "15 dias, sem qualquer possibilidade de prorrogação",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "20 dias, salvo decisão da Administração",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "30 dias, salvo motivo justificado",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "60 dias, em qualquer circunstância",
+        },
+      ],
+      answer: "c",
+      answerLabel: "c) 30 dias, salvo motivo justificado",
+      explanation:
+        "Nos termos do Art. 209.º, a instrução do processo de transgressão deve ser concluída no prazo de 30 dias, salvo motivo justificado.",
     },
 
     {
@@ -102,24 +148,71 @@ const quizBloco10: Quiz = {
     {
       id: "10.7",
       number: 7,
-      type: "open",
+      type: "multiple_choice",
       question:
         "Em que língua devem ser escritas as declarações apresentadas pelos contribuintes?",
-      answer: "Na língua oficial da República de Angola, ou seja, português.",
-      answerLabel: "Língua oficial da República de Angola (português)",
-      explanation: "As declarações devem ser apresentadas em português.",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Em qualquer língua escolhida pelo contribuinte",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Na língua oficial da República de Angola, ou seja, português",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Apenas em inglês ou português",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Na língua materna do contribuinte",
+        },
+      ],
+      answer: "b",
+      answerLabel:
+        "b) Na língua oficial da República de Angola, ou seja, português",
+      explanation:
+        "As declarações apresentadas pelos contribuintes devem ser escritas na língua oficial da República de Angola, isto é, em português.",
     },
 
     {
       id: "10.8",
       number: 8,
-      type: "open",
+      type: "multiple_choice",
       question:
         "Segundo o Art. 229.º, em caso de lacuna nas relações tributárias, que normas se aplicam subsidiariamente?",
-      answer:
-        "Aplicam-se subsidiariamente as normas dos Códigos e demais legislação afim em vigor em Angola.",
-      answerLabel: "Códigos e demais legislação afim em vigor em Angola",
-      explanation: "Art. 229.º.",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Apenas as normas do Código Civil",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Apenas os regulamentos emitidos pela Administração Tributária",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "As normas dos Códigos e demais legislação afim em vigor em Angola",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Exclusivamente as normas internacionais de direito tributário",
+        },
+      ],
+      answer: "c",
+      answerLabel:
+        "c) As normas dos Códigos e demais legislação afim em vigor em Angola",
+      explanation:
+        "Segundo o Art. 229.º, aplicam-se subsidiariamente as normas dos Códigos e demais legislação afim em vigor em Angola.",
     },
   ],
 };

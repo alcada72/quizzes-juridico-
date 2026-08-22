@@ -1,4 +1,4 @@
-import type { Quiz } from "../types";
+import type { Quiz } from "../../types";
 
 const quizBloco7: Quiz = {
   id: "cgt-bloco-07",
@@ -24,11 +24,33 @@ const quizBloco7: Quiz = {
     {
       id: "7.2",
       number: 2,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Quais os limites mínimo e máximo do número de prestações mensais em que uma dívida tributária pode ser paga, segundo o Art. 136.º/6?",
-      answer: "Mínimo de 6 e máximo de 18 prestações.",
-      answerLabel: "Mínimo de 6 e máximo de 18 prestações",
+        "Segundo o Art. 136.º/6, dentro de que limites uma dívida tributária pode ser paga em prestações mensais?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Mínimo de 3 e máximo de 12 prestações",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Mínimo de 6 e máximo de 18 prestações",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Mínimo de 6 e máximo de 24 prestações",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Mínimo de 12 e máximo de 24 prestações",
+        },
+      ],
+      answer: "b",
+      answerLabel: "b) Mínimo de 6 e máximo de 18 prestações",
       explanation:
         "A dívida tributária pode ser paga em um mínimo de 6 e um máximo de 18 prestações mensais.",
     },
@@ -80,10 +102,33 @@ const quizBloco7: Quiz = {
     {
       id: "7.5",
       number: 5,
-      type: "open",
-      question: "O que constitui título de cobrança das dívidas tributárias?",
-      answer: "O documento de arrecadação das receitas.",
-      answerLabel: "O documento de arrecadação das receitas",
+      type: "multiple_choice",
+      question:
+        "O que constitui título de cobrança das dívidas tributárias?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "A declaração anual de rendimentos",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "O documento de arrecadação das receitas",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "O contrato celebrado entre o contribuinte e a Administração Tributária",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "O relatório da inspecção tributária",
+        },
+      ],
+      answer: "b",
+      answerLabel: "b) O documento de arrecadação das receitas",
       explanation:
         "O documento de arrecadação das receitas constitui o título de cobrança das dívidas tributárias.",
     },
@@ -102,12 +147,34 @@ const quizBloco7: Quiz = {
     {
       id: "7.7",
       number: 7,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Qual a finalidade da inspecção tributária, segundo o Art. 141.º?",
-      answer:
-        "Averiguar a situação tributária dos contribuintes, substitutos, responsáveis solidários e subsidiários, e o cumprimento dos deveres acessórios.",
-      answerLabel: "Resposta esperada",
+        "Qual é a finalidade da inspecção tributária, segundo o Art. 141.º?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Apenas aplicar multas aos contribuintes que não paguem os seus impostos.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Apenas cobrar coercivamente as dívidas tributárias vencidas.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Averiguar a situação tributária dos contribuintes, substitutos, responsáveis solidários e subsidiários, bem como o cumprimento dos deveres acessórios.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Determinar exclusivamente o valor dos bens penhoráveis do contribuinte.",
+        },
+      ],
+      answer: "c",
+      answerLabel:
+        "c) Averiguar a situação tributária dos contribuintes, substitutos, responsáveis solidários e subsidiários, bem como o cumprimento dos deveres acessórios.",
       explanation:
         "A inspecção tributária visa averiguar a situação tributária dos contribuintes, substitutos e responsáveis solidários e subsidiários, bem como verificar o cumprimento dos deveres acessórios.",
     },

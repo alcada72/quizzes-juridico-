@@ -1,6 +1,6 @@
-import { Questions } from "..";
+import { Questions_cgt } from "../questionst_cgt";
 
-export type QuizBlocoTypes = keyof typeof Questions;
+export type QuizBlocoTypes = keyof typeof Questions_cgt;
 
 export type QuizQuestionType = "true_false" | "multiple_choice" | "open";
 

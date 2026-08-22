@@ -1,4 +1,4 @@
-import type { Quiz } from "../types";
+import type { Quiz } from "../../types";
 
 const quizBloco9: Quiz = {
   id: "cgt-bloco-09",
@@ -13,11 +13,34 @@ const quizBloco9: Quiz = {
     {
       id: "9.1",
       number: 1,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Qual a moldura penal base para o crime de fraude fiscal (Art. 172.º)?",
-      answer: "Prisão de 6 meses a 3 anos ou multa até 360 dias.",
-      answerLabel: "Prisão de 6 meses a 3 anos ou multa até 360 dias",
+        "Qual é a moldura penal base para o crime de fraude fiscal previsto no Art. 172.º?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Prisão de 3 meses a 1 ano ou multa até 120 dias",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Prisão de 6 meses a 3 anos ou multa até 360 dias",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Prisão de 1 a 5 anos ou multa até 500 dias",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Prisão de 2 a 8 anos ou multa até 720 dias",
+        },
+      ],
+      answer: "b",
+      answerLabel:
+        "b) Prisão de 6 meses a 3 anos ou multa até 360 dias",
       explanation:
         "A fraude fiscal é punível com pena de prisão de 6 meses a 3 anos ou multa até 360 dias.",
     },
@@ -71,11 +94,34 @@ const quizBloco9: Quiz = {
     {
       id: "9.4",
       number: 4,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Qual a moldura penal para a violação de sigilo fiscal por um funcionário (Art. 180.º)?",
-      answer: "Prisão de 2 a 5 anos, ou multa criminal correspondente.",
-      answerLabel: "Prisão de 2 a 5 anos ou multa criminal correspondente",
+        "Qual é a moldura penal para a violação de sigilo fiscal por um funcionário, nos termos do Art. 180.º?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Prisão de 6 meses a 2 anos ou multa criminal correspondente",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Prisão de 1 a 3 anos ou multa criminal correspondente",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Prisão de 2 a 5 anos ou multa criminal correspondente",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Prisão de 5 a 8 anos, sem possibilidade de multa",
+        },
+      ],
+      answer: "c",
+      answerLabel:
+        "c) Prisão de 2 a 5 anos ou multa criminal correspondente",
       explanation:
         "A violação de sigilo fiscal por funcionário é punível com prisão de 2 a 5 anos ou multa criminal correspondente.",
     },
@@ -95,12 +141,34 @@ const quizBloco9: Quiz = {
     {
       id: "9.6",
       number: 6,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "O que distingue o 'contrabando qualificado' (Art. 186.º) do contrabando simples?",
-      answer:
-        "O contrabando qualificado ocorre quando existem circunstâncias agravantes previstas na lei, como valor elevado superior a Kz 20.000.000,00, objectos de interesse histórico ou artístico, uso de armas ou violência, conivência de funcionário ou prática nocturna, entre outras.",
-      answerLabel: "Resposta esperada",
+        "O que distingue o contrabando qualificado, previsto no Art. 186.º, do contrabando simples?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "O contrabando qualificado ocorre apenas quando o agente é funcionário público.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "O contrabando qualificado ocorre quando existem circunstâncias agravantes previstas na lei, como valor elevado superior a Kz 20.000.000,00, objectos de interesse histórico ou artístico, uso de armas ou violência, conivência de funcionário ou prática nocturna, entre outras.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "O contrabando qualificado distingue-se apenas pelo pagamento de uma multa mais elevada.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "O contrabando qualificado ocorre exclusivamente quando a mercadoria é transportada por via marítima.",
+        },
+      ],
+      answer: "b",
+      answerLabel:
+        "b) O contrabando qualificado ocorre quando existem circunstâncias agravantes previstas na lei, como valor elevado superior a Kz 20.000.000,00, objectos de interesse histórico ou artístico, uso de armas ou violência, conivência de funcionário ou prática nocturna, entre outras.",
       explanation:
         "A diferença está na existência de circunstâncias agravantes que tornam a conduta mais grave, nos termos do Art. 186.º.",
     },

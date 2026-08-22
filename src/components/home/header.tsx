@@ -1,5 +1,5 @@
 import colors from "@/constants/colors";
-import { storeUsername } from "@/service/points.service";
+import { storeUsername } from "@/service/user.service";
 import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useEffect, useRef, useState } from "react";
@@ -18,12 +18,10 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Mantém o input sincronizado caso o nome venha de fora
   useEffect(() => {
     setUsername(name);
   }, [name]);
 
-  // Limpa o timer quando o componente desmontar
   useEffect(() => {
     return () => {
       if (debounceRef.current) {
@@ -33,17 +31,14 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
   }, []);
 
   const handleChangeName = (value: string) => {
-    // Limita espaços desnecessários
     const newName = value.replace(/\s+/g, " ");
 
     setUsername(newName);
 
-    // Cancela o debounce anterior
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
     }
 
-    // Novo debounce
     debounceRef.current = setTimeout(async () => {
       const cleanName = newName.trim();
 
@@ -52,7 +47,6 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
       try {
         await storeUsername(cleanName);
 
-        // Atualiza o estado da Home, caso seja controlado pelo pai
         onNameChange?.(cleanName);
       } catch (error) {
         console.error("Erro ao salvar nome:", error);
@@ -65,7 +59,6 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
   };
 
   const handleFinishEditing = async () => {
-    // Cancela debounce pendente
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
       debounceRef.current = null;
@@ -81,7 +74,7 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
     setIsEditing(false);
   };
 
-  const displayName = username.trim() || "Usuário";
+  const displayName = username.trim();
 
   return (
     <View className="flex-row items-center justify-between">
@@ -142,7 +135,6 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
         )}
       </View>
 
-      {/* Profile */}
       <Pressable
         onPress={() => router.push("/profile")}
         accessibilityRole="button"

@@ -1,7 +1,9 @@
 import colors from "@/constants/colors";
+import { getUsername } from "@/service/user.service";
 import { Feather } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
 export default function ResultScreen() {
@@ -13,16 +15,29 @@ export default function ResultScreen() {
     total: string;
   }>();
 
+  const [username, setUsername] = useState("");
+
   const totalQuestions = Number(total);
   const correctAnswers = Number(correct!);
   const wrongAnswers = totalQuestions - correctAnswers;
   const percentage = (correctAnswers / totalQuestions) * 100;
 
+  useEffect(() => {
+    const loadUser = async () => {
+      const name = await getUsername();
+
+      if (name) {
+        setUsername(name);
+      }
+    };
+
+    loadUser();
+  }, []);
+
   return (
     <View className="flex-1 bg-slate-50">
       <StatusBar backgroundColor={colors.primary} style="light" />
 
-      {/* Header Background */}
       <View
         className="absolute left-0 top-0 h-[280px] w-full"
         style={{
@@ -36,7 +51,6 @@ export default function ResultScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerClassName="px-5 pb-10 pt-8"
       >
-        {/* Header */}
         <View className="items-center">
           <View className="mb-3 size-14 items-center justify-center rounded-full bg-white/20">
             <Feather name="award" size={30} color={colors.white} />
@@ -51,13 +65,11 @@ export default function ResultScreen() {
           </Text>
         </View>
 
-        {/* Score Card */}
         <View className="mt-10 items-center rounded-[32px] bg-white px-6 py-8 shadow-sm">
           <Text className="text-sm font-bold uppercase tracking-wider text-slate-400">
             Sua pontuação
           </Text>
 
-          {/* Circular Score */}
           <View className="mt-5 size-48 items-center justify-center rounded-full border-[12px] border-indigo-100">
             <View className="absolute size-36 items-center justify-center rounded-full border-4 border-yellow-400">
               <Text className="text-5xl font-black text-indigo-600">
@@ -79,7 +91,6 @@ export default function ResultScreen() {
           </Text>
         </View>
 
-        {/* Statistics */}
         <View className="mt-5 flex-row gap-3">
           {/* Correct */}
           <View className="flex-1 items-center rounded-2xl bg-white p-5">
@@ -96,7 +107,6 @@ export default function ResultScreen() {
             </Text>
           </View>
 
-          {/* Wrong */}
           <View className="flex-1 items-center rounded-2xl bg-white p-5">
             <View className="size-11 items-center justify-center rounded-full bg-red-100">
               <Feather name="x" size={22} color="#dc2626" />
@@ -112,7 +122,6 @@ export default function ResultScreen() {
           </View>
         </View>
 
-        {/* XP Card */}
         <View className="mt-5 flex-row items-center rounded-2xl bg-yellow-400 p-5">
           <View className="size-12 items-center justify-center rounded-full bg-yellow-300">
             <Feather name="zap" size={25} color={colors.black} />
@@ -131,7 +140,6 @@ export default function ResultScreen() {
           <Feather name="trending-up" size={24} color={colors.black} />
         </View>
 
-        {/* Buttons */}
         <View className="mt-7 gap-3">
           <Pressable
             onPress={() => router.replace(`/(home)/quiz/${id}`)}

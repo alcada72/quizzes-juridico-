@@ -1,19 +1,16 @@
 import { HeaderHome } from "@/components/home/header";
 import { MainCard } from "@/components/home/mainCard";
 import { ProgressCard } from "@/components/home/progressCard";
-import { Questions } from "@/constants/questionst";
-import {
-    getProgress,
-    getUsername,
-    QuizProgress,
-} from "@/service/points.service";
+import { Quiz_Menu } from "@/constants/quiz_menu";
+import { getProgress, QuizProgress } from "@/service/points.service";
+import { getUsername } from "@/service/user.service";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
 export default function HomeScreen() {
   const router = useRouter();
-  const BLOCO_ENTRIES = Object.entries(Questions);
+  const MENU_ENTRIES = Object.entries(Quiz_Menu);
 
   const [username, setUsername] = useState("");
   const [progress, setprogress] = useState<QuizProgress>();
@@ -23,7 +20,9 @@ export default function HomeScreen() {
       const name = await getUsername();
       const resProgress = await getProgress();
       setprogress(resProgress);
-      setUsername(name);
+      if (name) {
+        setUsername(name);
+      }
     };
 
     loadUser();
@@ -35,13 +34,10 @@ export default function HomeScreen() {
       showsVerticalScrollIndicator={false}
       contentContainerClassName="px-5 pt-5 pb-28 bg-slate-50"
     >
-      {/* Header */}
       <HeaderHome name={username} onNameChange={setUsername} />
 
-      {/* Main Quiz Card */}
       <MainCard />
 
-      {/* Progress */}
       <ProgressCard
         totalXP={progress?.totalXP || 0}
         quizzesCompleted={progress?.quizzesCompleted || 0}
@@ -50,29 +46,33 @@ export default function HomeScreen() {
         totalQuestions={progress?.totalQuestions || 0}
       />
 
-      {/* Categories */}
       <View className="mt-8">
         <View className="mb-4 flex-row items-center justify-between">
-          <Text className="text-xl font-bold text-slate-900">Blocos</Text>
+          <Text className="text-xl font-bold text-slate-900">Temas</Text>
 
           <Text className="font-medium text-blue-600 hidden">Ver todas</Text>
         </View>
 
         <View className="flex-row flex-wrap justify-between gap-y-4">
-          {BLOCO_ENTRIES.map(([key, question], index) => (
+          {MENU_ENTRIES.map(([key, menu]) => (
             <Pressable
               key={key}
-              onPress={() => router.push(`/(home)/quiz/${key as string}`)}
+              onPress={() =>
+                router.push({
+                  pathname: "/quiz",
+                  params: {
+                    id: key,
+                  },
+                })
+              }
               className="w-[48%] rounded-2xl bg-white p-5 shadow-sm"
             >
-              <Text className="text-3xl">Bloco {index + 1}</Text>
-
-              <Text className="mt-4 font-semibold text-slate-900">
-                {question.title}
+              <Text className="text-xl font-bold text-slate-900">
+                {menu.name}
               </Text>
 
-              <Text className="mt-1 text-sm text-slate-400">
-                {question.questions.length} Questoes
+              <Text className="mt-2 text-sm text-slate-500">
+                {Object.keys(menu.questions_quis).length} blocos
               </Text>
             </Pressable>
           ))}

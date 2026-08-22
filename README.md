@@ -1,50 +1,71 @@
-# Welcome to your Expo app 👋
+# Quiz Tributário Angola 🇦🇴
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicação mobile de estudo e revisão sobre legislação tributária angolana, desenvolvida com **React Native**, **Expo** e **Expo Router**.
 
-## Get started
+O aplicativo permite estudar através de quizzes organizados por temas e blocos, responder a perguntas com limite de tempo, acompanhar a pontuação e consultar o resultado de cada sessão.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 📚 Conteúdos
 
-2. Start the app
+Actualmente, a aplicação está organizada em dois grandes módulos:
 
-   ```bash
-   npx expo start
-   ```
+### Código Geral Tributário
 
-In the output, you'll find options to open the app in a
+Baseado no:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+**Código Geral Tributário — Lei n.º 21/14, de 22 de Outubro**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Inclui blocos sobre temas como:
 
-## Get a fresh project
+- Princípios e disposições gerais
+- Relação jurídica tributária
+- Garantias
+- Procedimento tributário
+- Notificações
+- Matéria colectável
+- Liquidação
+- Reclamações e recursos
+- Cobrança e pagamento
+- Execução fiscal
+- Infracções tributárias
+- Responsabilidade e penas
 
-When you're ready, run:
+### Imposto Industrial em Angola
+
+Baseado principalmente em:
+
+- **Lei n.º 19/14, de 22 de Outubro** — Código do Imposto Industrial
+- **Lei n.º 26/20, de 20 de Julho** — alterações ao Código do Imposto Industrial
+
+Os conteúdos estão divididos em blocos sobre:
+
+- Incidência
+- Sujeitos passivos
+- Isenções
+- Regime Geral
+- Regime Simplificado
+- Determinação da matéria colectável
+- Amortizações
+- Prejuízos fiscais
+- Taxas
+- Liquidação
+- Pagamento
+- Prazos
+- Penalidades
+- Garantias do contribuinte
+- Enquadramento das alterações legislativas
+
+> **Nota:** Os quizzes têm finalidade educativa e de preparação para estudo. Para efeitos profissionais ou jurídicos, deve ser sempre consultada a legislação oficial em vigor.
+
+---
+
+# 🚀 Como começar
+
+## 1. Instalar as dependências
+
+Depois de clonar o projecto, execute:
 
 ```bash
-npm run reset-project
+npm install
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

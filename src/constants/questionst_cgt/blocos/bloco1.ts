@@ -1,4 +1,4 @@
-import { Quiz } from "../types";
+import { Quiz } from "../../types";
 
 const quizBloco1: Quiz = {
   id: "cgt-bloco-01",
@@ -27,26 +27,10 @@ const quizBloco1: Quiz = {
       type: "multiple_choice",
       question: "Qual das seguintes NÃO é uma definição do Art. 2.º?",
       options: [
-        {
-          id: "a",
-          label: "a)",
-          text: "Auto de notícia",
-        },
-        {
-          id: "b",
-          label: "b)",
-          text: "Caducidade do direito à liquidação",
-        },
-        {
-          id: "c",
-          label: "c)",
-          text: "Domicílio fiscal",
-        },
-        {
-          id: "d",
-          label: "d)",
-          text: "Relação jurídica tributária",
-        },
+        { id: "a", label: "a)", text: "Auto de notícia" },
+        { id: "b", label: "b)", text: "Caducidade do direito à liquidação" },
+        { id: "c", label: "c)", text: "Domicílio fiscal" },
+        { id: "d", label: "d)", text: "Relação jurídica tributária" },
       ],
       answer: "c",
       answerLabel: "c) Domicílio fiscal",
@@ -57,12 +41,34 @@ const quizBloco1: Quiz = {
     {
       id: "1.3",
       number: 3,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Distingue, por palavras tuas, juros compensatórios, juros de mora e juros indemnizatórios, indicando a quem beneficia cada um.",
-      answer:
-        "Juros compensatórios: compensam o Estado por atraso imputável ao contribuinte. Juros de mora: compensam o atraso no pagamento após o vencimento. Juros indemnizatórios: compensam o contribuinte por erro da Administração Tributária.",
-      answerLabel: "Resposta esperada",
+        "Qual das seguintes opções distingue correctamente os juros compensatórios, os juros de mora e os juros indemnizatórios?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Os juros compensatórios compensam o Estado por atraso imputável ao contribuinte; os juros de mora incidem pelo atraso no pagamento após o vencimento; e os juros indemnizatórios compensam o contribuinte por erro da Administração Tributária.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Os juros compensatórios compensam o contribuinte; os juros de mora compensam a Administração Tributária por erro; e os juros indemnizatórios são aplicados apenas às infracções tributárias.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Os três tipos de juros destinam-se exclusivamente a compensar o Estado pelo atraso do contribuinte.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Os juros compensatórios e indemnizatórios são sempre pagos pelo Estado, enquanto os juros de mora são pagos pelo contribuinte.",
+        },
+      ],
+      answer: "a",
+      answerLabel:
+        "a) Os juros compensatórios compensam o Estado por atraso imputável ao contribuinte; os juros de mora incidem pelo atraso no pagamento após o vencimento; e os juros indemnizatórios compensam o contribuinte por erro da Administração Tributária.",
       explanation:
         "Os juros compensatórios e de mora estão relacionados com o atraso imputável ao contribuinte, enquanto os juros indemnizatórios visam compensar o contribuinte por erro da Administração Tributária.",
     },
@@ -94,12 +100,34 @@ const quizBloco1: Quiz = {
     {
       id: "1.6",
       number: 6,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Enumera as duas categorias de contribuições especiais previstas no Art. 3.º e dá um exemplo de cada.",
-      answer:
-        "Contribuições de melhoria ou de maior desgaste, relacionadas com obras públicas, e contribuições financeiras ou parafiscais.",
-      answerLabel: "Resposta esperada",
+        "Quais são as duas categorias de contribuições especiais previstas no Art. 3.º?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Contribuições de melhoria ou de maior desgaste e contribuições financeiras ou parafiscais.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Contribuições municipais e contribuições estaduais.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Contribuições directas e contribuições indirectas.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Contribuições patrimoniais e contribuições sobre o rendimento.",
+        },
+      ],
+      answer: "a",
+      answerLabel:
+        "a) Contribuições de melhoria ou de maior desgaste e contribuições financeiras ou parafiscais.",
       explanation:
         "As duas categorias são as contribuições de melhoria/maior desgaste e as contribuições financeiras/parafiscais.",
     },
@@ -141,12 +169,34 @@ const quizBloco1: Quiz = {
     {
       id: "1.8",
       number: 8,
-      type: "open",
+      type: "multiple_choice",
       question:
         "Segundo o Art. 4.º, quais são os quatro princípios da tributação?",
-      answer: "Igualdade, legalidade fiscal, equivalência e justiça material.",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Igualdade, legalidade fiscal, equivalência e justiça material.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Legalidade, proporcionalidade, capacidade contributiva e neutralidade.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Igualdade, solidariedade, capacidade contributiva e eficiência.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Legalidade, igualdade, universalidade e progressividade.",
+        },
+      ],
+      answer: "a",
       answerLabel:
-        "Igualdade, legalidade fiscal, equivalência e justiça material.",
+        "a) Igualdade, legalidade fiscal, equivalência e justiça material.",
       explanation:
         "Os quatro princípios indicados são igualdade, legalidade fiscal, equivalência e justiça material.",
     },
@@ -165,14 +215,13 @@ const quizBloco1: Quiz = {
     {
       id: "1.10",
       number: 10,
-      type: "open",
+      type: "true_false",
       question:
-        "Segundo o Art. 8.º, o que não pode ser feito retroactivamente em matéria de incidência tributária?",
-      answer:
-        "Criar impostos, ampliar normas de incidência, agravar taxas ou revogar benefícios fiscais concedidos, salvo em caso de ilegalidade.",
-      answerLabel: "Resposta esperada",
+        "Em matéria de incidência tributária, podem ser criados retroactivamente novos impostos, ampliadas normas de incidência, agravadas taxas ou revogados benefícios fiscais concedidos, ainda que não exista qualquer situação de ilegalidade.",
+      answer: false,
+      answerLabel: "Falso",
       explanation:
-        "Não podem ser criados impostos, ampliadas normas de incidência, agravadas taxas ou revogados benefícios fiscais concedidos, salvo quando exista ilegalidade.",
+        "O Art. 8.º impede a retroactividade na criação de impostos, ampliação das normas de incidência, agravamento de taxas e revogação de benefícios fiscais concedidos, salvo em caso de ilegalidade.",
     },
 
     {
@@ -189,12 +238,34 @@ const quizBloco1: Quiz = {
     {
       id: "1.12",
       number: 12,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Como se determina o 'território nacional' para efeitos tributários, nos termos do Art. 9.º?",
-      answer:
-        "Inclui o território terrestre, águas interiores, mar territorial, zona contígua, zona económica exclusiva e plataforma continental.",
-      answerLabel: "Resposta esperada",
+        "Para efeitos tributários, o que está incluído no conceito de território nacional, nos termos do Art. 9.º?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Apenas o território terrestre de Angola.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "O território terrestre e as águas interiores, excluindo as zonas marítimas.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "O território terrestre, águas interiores, mar territorial, zona contígua, zona económica exclusiva e plataforma continental.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Apenas o território terrestre e o mar territorial.",
+        },
+      ],
+      answer: "c",
+      answerLabel:
+        "c) O território terrestre, águas interiores, mar territorial, zona contígua, zona económica exclusiva e plataforma continental.",
       explanation:
         "Para efeitos tributários, o território nacional abrange o território terrestre, águas interiores, mar territorial, zona contígua, zona económica exclusiva e plataforma continental.",
     },

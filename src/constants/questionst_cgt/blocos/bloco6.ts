@@ -1,4 +1,4 @@
-import type { Quiz } from "../types";
+import type { Quiz } from "../../types";
 
 const quizBloco6: Quiz = {
   id: "cgt-bloco-06",
@@ -24,12 +24,34 @@ const quizBloco6: Quiz = {
     {
       id: "6.2",
       number: 2,
-      type: "open",
+      type: "multiple_choice",
       question:
         "Em que casos é permitido o apuramento indirecto da matéria colectável, segundo o Art. 106.º?",
-      answer:
-        "Fora dos casos em que a matéria colectável deva ser colectivamente determinada, ou com fundamento em falta, insuficiência ou ausência de elementos comprovativos dos dados declarados pelo contribuinte.",
-      answerLabel: "Resposta esperada",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Sempre que o contribuinte solicite expressamente à Administração Tributária.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Apenas quando o contribuinte não tenha qualquer actividade económica.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Quando exista falta, insuficiência ou ausência de elementos comprovativos dos dados declarados pelo contribuinte, nos casos previstos na Lei.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Sempre que a Administração Tributária considere a matéria colectável demasiado elevada.",
+        },
+      ],
+      answer: "c",
+      answerLabel:
+        "c) Quando exista falta, insuficiência ou ausência de elementos comprovativos dos dados declarados pelo contribuinte, nos casos previstos na Lei.",
       explanation:
         "O apuramento indirecto é permitido nos casos previstos no Art. 106.º, designadamente quando existam falta, insuficiência ou ausência de elementos comprovativos dos dados declarados pelo contribuinte.",
     },
@@ -81,11 +103,33 @@ const quizBloco6: Quiz = {
     {
       id: "6.5",
       number: 5,
-      type: "open",
+      type: "multiple_choice",
       question:
         "A partir de que montante a decisão de deferimento, favorável ao contribuinte, de uma reclamação carece de confirmação superior obrigatória, sob pena de nulidade?",
-      answer: "Kz 1.000.000,00.",
-      answerLabel: "Kz 1.000.000,00",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Kz 500.000,00",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Kz 750.000,00",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Kz 1.000.000,00",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Kz 2.000.000,00",
+        },
+      ],
+      answer: "c",
+      answerLabel: "c) Kz 1.000.000,00",
       explanation: "Art. 117.º.",
     },
 
@@ -125,11 +169,33 @@ const quizBloco6: Quiz = {
     {
       id: "6.7",
       number: 7,
-      type: "open",
+      type: "multiple_choice",
       question:
         "Em quanto tempo deve ser decidida a reclamação administrativa?",
-      answer: "45 dias.",
-      answerLabel: "45 dias",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "15 dias",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "30 dias",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "45 dias",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "90 dias",
+        },
+      ],
+      answer: "c",
+      answerLabel: "c) 45 dias",
       explanation: "Art. 129.º/3.",
     },
 
@@ -147,12 +213,33 @@ const quizBloco6: Quiz = {
     {
       id: "6.9",
       number: 9,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Em quantos dias deve ser interposto o recurso hierárquico e em quanto tempo deve ser decidido?",
-      answer:
-        "O recurso hierárquico deve ser interposto no prazo de 15 dias e decidido no prazo de 45 dias.",
-      answerLabel: "15 dias para interpor e 45 dias para decidir",
+        "Quais são os prazos para interposição e decisão do recurso hierárquico?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "10 dias para interpor e 30 dias para decidir",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "15 dias para interpor e 45 dias para decidir",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "30 dias para interpor e 45 dias para decidir",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "15 dias para interpor e 90 dias para decidir",
+        },
+      ],
+      answer: "b",
+      answerLabel: "b) 15 dias para interpor e 45 dias para decidir",
       explanation:
         "O prazo de interposição é de 15 dias e o prazo para decisão é de 45 dias, nos termos do Art. 133.º.",
     },

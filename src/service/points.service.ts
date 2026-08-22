@@ -2,13 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEYS = {
   score: "@quiz/score",
-  username: "@quiz/username",
   progress: "@quiz/progress",
 } as const;
-
-// ============================================
-// TYPES
-// ============================================
 
 export type QuizProgress = {
   totalXP: number;
@@ -18,10 +13,6 @@ export type QuizProgress = {
   totalQuestions: number;
 };
 
-// ============================================
-// DEFAULT PROGRESS
-// ============================================
-
 export const DEFAULT_PROGRESS: QuizProgress = {
   totalXP: 0,
   quizzesCompleted: 0,
@@ -29,10 +20,6 @@ export const DEFAULT_PROGRESS: QuizProgress = {
   correctAnswers: 0,
   totalQuestions: 0,
 };
-
-// ============================================
-// SCORE
-// ============================================
 
 export const storeDataScore = async (value: number) => {
   try {
@@ -52,33 +39,6 @@ export const getDataScore = async (): Promise<number> => {
     return 0;
   }
 };
-
-// ============================================
-// USERNAME
-// ============================================
-
-export const storeUsername = async (name: string) => {
-  try {
-    await AsyncStorage.setItem(STORAGE_KEYS.username, name.trim());
-  } catch (error) {
-    console.error("Erro ao salvar nome:", error);
-  }
-};
-
-export const getUsername = async (): Promise<string> => {
-  try {
-    const value = await AsyncStorage.getItem(STORAGE_KEYS.username);
-
-    return value ?? "";
-  } catch (error) {
-    console.error("Erro ao obter nome:", error);
-    return "";
-  }
-};
-
-// ============================================
-// PROGRESS
-// ============================================
 
 export const storeProgress = async (progress: QuizProgress): Promise<void> => {
   try {
@@ -109,10 +69,6 @@ export const getProgress = async (): Promise<QuizProgress> => {
   }
 };
 
-// ============================================
-// ATUALIZAR PROGRESSO
-// ============================================
-
 export const updateProgress = async (
   updates: Partial<QuizProgress>,
 ): Promise<QuizProgress> => {
@@ -133,10 +89,6 @@ export const updateProgress = async (
     return getProgress();
   }
 };
-
-// ============================================
-// FINALIZAR QUIZ
-// ============================================
 
 type CompleteQuizParams = {
   correctAnswers: number;
@@ -179,17 +131,9 @@ export const completeQuiz = async ({
   }
 };
 
-// ============================================
-// LIMPAR DADOS
-// ============================================
-
-export const clearQuizData = async () => {
+export const clearQuizDataPoints = async () => {
   try {
-    await AsyncStorage.multiRemove([
-      STORAGE_KEYS.score,
-      STORAGE_KEYS.username,
-      STORAGE_KEYS.progress,
-    ]);
+    await AsyncStorage.multiRemove([STORAGE_KEYS.score, STORAGE_KEYS.progress]);
   } catch (error) {
     console.error("Erro ao limpar dados:", error);
   }

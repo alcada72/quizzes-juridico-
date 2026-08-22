@@ -1,4 +1,4 @@
-import { Quiz } from "../types";
+import { Quiz } from "../../types";
 
 const quizBloco3: Quiz = {
   id: "cgt-bloco-03",
@@ -24,12 +24,34 @@ const quizBloco3: Quiz = {
     {
       id: "3.2",
       number: 2,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "O que é a 'simulação' em matéria tributária e qual a regra em caso de divergência entre o preço real e o preço declarado no contrato (Art. 27.º)?",
-      answer:
-        "A simulação de acto ou negócio jurídico não impede a tributação do acto dissimulado. Havendo divergência entre o preço real e o preço declarado, a tributação recai sobre o preço mais alto.",
-      answerLabel: "Resposta esperada",
+        "Em matéria tributária, qual das seguintes afirmações sobre a simulação e a divergência entre o preço real e o preço declarado está correcta?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "A simulação impede sempre a tributação do acto dissimulado e considera-se apenas o preço declarado.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "A simulação de acto ou negócio jurídico não impede a tributação do acto dissimulado e, havendo divergência entre o preço real e o declarado, considera-se o preço mais alto.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "A simulação só pode ser tributada quando autorizada pela Administração Tributária.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Havendo divergência, considera-se sempre o preço mais baixo para efeitos de tributação.",
+        },
+      ],
+      answer: "b",
+      answerLabel:
+        "b) A simulação de acto ou negócio jurídico não impede a tributação do acto dissimulado e, havendo divergência entre o preço real e o declarado, considera-se o preço mais alto.",
       explanation:
         "A simulação não impede a tributação do acto dissimulado. Quando existe divergência entre o preço real e o preço declarado, considera-se o preço mais alto para efeitos de tributação.",
     },
@@ -82,22 +104,66 @@ const quizBloco3: Quiz = {
     {
       id: "3.5",
       number: 5,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Qual o prazo, em dias, que um contribuinte residente tem de estar ausente do País para se tornar obrigatória a nomeação de representante fiscal?",
-      answer: "Mais de 180 dias corridos.",
-      answerLabel: "Mais de 180 dias corridos",
+        "Qual é o período de ausência do País que torna obrigatória a nomeação de representante fiscal por um contribuinte residente?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Mais de 30 dias corridos",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Mais de 90 dias corridos",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Mais de 180 dias corridos",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Mais de 365 dias corridos",
+        },
+      ],
+      answer: "c",
+      answerLabel: "c) Mais de 180 dias corridos",
       explanation: "Art. 33.º/3.",
     },
 
     {
       id: "3.6",
       number: 6,
-      type: "open",
+      type: "multiple_choice",
       question:
         "Quantos dias de permanência em Angola, num ano civil, tornam uma pessoa singular residente para efeitos fiscais?",
-      answer: "Mais de 183 dias, seguidos ou interpolados.",
-      answerLabel: "Mais de 183 dias",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Mais de 90 dias",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Mais de 120 dias",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Mais de 183 dias",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Mais de 365 dias",
+        },
+      ],
+      answer: "c",
+      answerLabel: "c) Mais de 183 dias",
       explanation:
         "A permanência em Angola por mais de 183 dias, seguidos ou interpolados, num ano civil, determina a residência fiscal da pessoa singular, segundo o material fornecido.",
     },
@@ -138,12 +204,34 @@ const quizBloco3: Quiz = {
     {
       id: "3.8",
       number: 8,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Define 'estabelecimento estável' segundo o Art. 39.º e dá três exemplos das instalações fixas mencionadas.",
-      answer:
-        "É uma instalação fixa através da qual a empresa exerce toda ou parte da sua actividade. Exemplos: local de direcção, sucursal, escritório, fábrica, oficina, mina, poço de petróleo ou gás.",
-      answerLabel: "Resposta esperada",
+        "Qual das seguintes opções define correctamente um estabelecimento estável e apresenta exemplos de instalações fixas?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "É apenas a sede principal de uma empresa. Exemplos: residência do gerente, veículo e conta bancária.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "É uma instalação fixa através da qual a empresa exerce toda ou parte da sua actividade. Exemplos: local de direcção, sucursal, escritório, fábrica ou oficina.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "É qualquer actividade realizada temporariamente por uma empresa. Exemplos: reuniões, viagens e contratos.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "É exclusivamente uma instalação destinada à extracção de petróleo ou gás.",
+        },
+      ],
+      answer: "b",
+      answerLabel:
+        "b) É uma instalação fixa através da qual a empresa exerce toda ou parte da sua actividade. Exemplos: local de direcção, sucursal, escritório, fábrica ou oficina.",
       explanation:
         "O estabelecimento estável corresponde a uma instalação fixa através da qual uma empresa exerce toda ou parte da sua actividade. Exemplos incluem local de direcção, sucursal, escritório, fábrica, oficina e instalações de extracção de recursos naturais.",
     },
@@ -162,12 +250,34 @@ const quizBloco3: Quiz = {
     {
       id: "3.10",
       number: 10,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "O que é a 'substituição tributária' (Art. 45.º) e qual o mecanismo mais comum pelo qual se efectiva?",
-      answer:
-        "É a situação em que o imposto é exigido a pessoa diversa do contribuinte efectivo. Em regra, efectiva-se por retenção na fonte.",
-      answerLabel: "Resposta esperada",
+        "O que é a substituição tributária e qual é o mecanismo mais comum pelo qual se efectiva?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "É a situação em que o imposto é eliminado para o contribuinte efectivo, sendo normalmente efectivada por isenção fiscal.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "É a situação em que o imposto é exigido a pessoa diversa do contribuinte efectivo, sendo normalmente efectivada por retenção na fonte.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "É a transferência de uma dívida tributária para outra Administração Tributária, sendo efectivada por compensação.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "É a substituição de um imposto por outro, sendo efectivada por liquidação adicional.",
+        },
+      ],
+      answer: "b",
+      answerLabel:
+        "b) É a situação em que o imposto é exigido a pessoa diversa do contribuinte efectivo, sendo normalmente efectivada por retenção na fonte.",
       explanation:
         "Na substituição tributária, o imposto é exigido a uma pessoa diferente do contribuinte efectivo. O mecanismo mais comum de efectivação é a retenção na fonte.",
     },

@@ -1,4 +1,4 @@
-import type { Quiz } from "../types";
+import type { Quiz } from "../../types";
 
 const quizBloco11: Quiz = {
   id: "cgt-bloco-11",
@@ -14,11 +14,33 @@ const quizBloco11: Quiz = {
     {
       id: "11.1",
       number: 1,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Um contribuinte deveria ter pago um imposto de Kz 2.000.000,00 até 30 de Abril, mas só o Estado detectou e liquidou o atraso 3 meses depois. Considerando uma taxa de juros compensatórios de 1% ao mês, calcula o valor aproximado dos juros compensatórios devidos.",
-      answer: "3% de Kz 2.000.000,00 = Kz 60.000,00.",
-      answerLabel: "Kz 60.000,00 de juros compensatórios",
+        "Um contribuinte deveria ter pago um imposto de Kz 2.000.000,00 até 30 de Abril, mas o Estado só detectou e liquidou o atraso 3 meses depois. Considerando uma taxa de juros compensatórios de 1% ao mês, qual é o valor aproximado dos juros compensatórios devidos?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Kz 20.000,00",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Kz 40.000,00",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Kz 60.000,00",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Kz 80.000,00",
+        },
+      ],
+      answer: "c",
+      answerLabel: "c) Kz 60.000,00",
       explanation:
         "Cálculo simplificado: 1% × 3 meses = 3%. Assim, 3% de Kz 2.000.000,00 corresponde a Kz 60.000,00. O cálculo efectivo pode considerar a contagem exacta dos dias, conforme o Art. 51.º.",
     },
@@ -26,12 +48,11 @@ const quizBloco11: Quiz = {
     {
       id: "11.2",
       number: 2,
-      type: "open",
+      type: "true_false",
       question:
-        "Um contribuinte tem uma dívida tributária de Kz 500.000,00 vencida há 2 anos, mas paga voluntariamente nos primeiros 5 dias úteis após o vencimento, relativamente a cada mensalidade em atraso. O que acontece à taxa de juros de mora aplicável a esse pagamento antecipado?",
-      answer:
-        "A taxa de juros de mora é reduzida para 50% do montante que seria devido.",
-      answerLabel: "Redução para 50%",
+        "Quando o pagamento voluntário é realizado nos primeiros cinco dias úteis posteriores ao vencimento, a taxa de juros de mora aplicável é reduzida para 50% do montante que seria normalmente devido.",
+      answer: true,
+      answerLabel: "Verdadeiro",
       explanation:
         "Nos termos do Art. 52.º/6, o pagamento voluntário realizado nos primeiros cinco dias úteis posteriores ao vencimento beneficia da redução indicada.",
     },
@@ -39,13 +60,34 @@ const quizBloco11: Quiz = {
     {
       id: "11.3",
       number: 3,
-      type: "open",
+      type: "multiple_choice",
       question:
         "A Empresa X não entregou ao Estado, no prazo de 90 dias após o termo do prazo legal, uma retenção na fonte de IRT de Kz 800.000,00 que havia efectivamente retido aos seus trabalhadores. Que crime tributário poderá estar em causa e qual a moldura penal aplicável?",
-      answer:
-        "Pode configurar abuso de confiança fiscal, previsto no Art. 179.º. Considerando o valor indicado, superior ao limiar de Kz 500.000,00, a moldura penal é de prisão de 6 meses a 3 anos ou multa criminal correspondente.",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Fraude fiscal — prisão até 6 meses ou multa",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Abuso de confiança fiscal — prisão de 6 meses a 3 anos ou multa criminal correspondente",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Desobediência fiscal — prisão de 1 a 2 anos, sem possibilidade de multa",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Não existe qualquer crime, tratando-se apenas de uma infracção administrativa",
+        },
+      ],
+      answer: "b",
       answerLabel:
-        "Abuso de confiança fiscal — prisão de 6 meses a 3 anos ou multa",
+        "b) Abuso de confiança fiscal — prisão de 6 meses a 3 anos ou multa criminal correspondente",
       explanation:
         "A retenção foi efectivamente realizada, mas não foi entregue ao Estado dentro do prazo indicado. Segundo o material fornecido, o valor também ultrapassa o limiar indicado para o crime.",
     },
@@ -53,24 +95,68 @@ const quizBloco11: Quiz = {
     {
       id: "11.4",
       number: 4,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Um contribuinte pretende reclamar administrativamente da liquidação adicional de imposto que lhe foi notificada há 10 dias. Tem prazo? Qual o prazo máximo para a Administração decidir?",
-      answer:
-        "Sim. A reclamação deve ser apresentada no prazo de 15 dias contados da notificação. Como decorreram apenas 10 dias, ainda está dentro do prazo. A Administração deve decidir no prazo de 45 dias.",
-      answerLabel: "Sim — 15 dias para reclamar e 45 dias para decidir",
+        "Um contribuinte pretende reclamar administrativamente da liquidação adicional de imposto que lhe foi notificada há 10 dias. Ainda pode apresentar a reclamação e qual é o prazo para a Administração decidir?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "Não. O prazo já terminou aos 5 dias e a Administração não tem prazo para decidir.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "Sim. Tem 15 dias para reclamar e a Administração deve decidir no prazo de 45 dias.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Sim. Tem 30 dias para reclamar e a Administração deve decidir no prazo de 60 dias.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "Não. O prazo para reclamar é de 10 dias e a Administração dispõe de 90 dias para decidir.",
+        },
+      ],
+      answer: "b",
+      answerLabel:
+        "b) Sim. Tem 15 dias para reclamar e a Administração deve decidir no prazo de 45 dias.",
       explanation:
-        "Nos termos do Art. 129.º, o prazo para reclamação é de 15 dias e o prazo para decisão é de 45 dias.",
+        "Nos termos do Art. 129.º, o prazo para reclamação é de 15 dias e o prazo para decisão é de 45 dias. Como decorreram apenas 10 dias, ainda está dentro do prazo.",
     },
 
     {
       id: "11.5",
       number: 5,
-      type: "open",
+      type: "multiple_choice",
       question:
         "Uma empresa foi alvo de uma acção de inspecção. O inspector lavrou auto de notícia por falta de entrega de IVA no valor de Kz 3.000.000,00. Se a empresa pagar a multa mínima aplicável dentro de 15 dias da notificação, que percentagem da multa mínima irá pagar?",
-      answer: "20% do montante mínimo da multa aplicável.",
-      answerLabel: "20% do montante mínimo",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "10%",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "20%",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "50%",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "75%",
+        },
+      ],
+      answer: "b",
+      answerLabel: "b) 20% do montante mínimo",
       explanation:
         "Segundo o Art. 166.º/1, o pagamento decorrente de acção inspectiva dentro do prazo indicado permite a redução para 20% do montante mínimo aplicável.",
     },
@@ -78,28 +164,48 @@ const quizBloco11: Quiz = {
     {
       id: "11.6",
       number: 6,
-      type: "open",
+      type: "true_false",
       question:
-        "Uma pessoa colectiva não fez a declaração de rendimentos há 6 anos. A Administração Tributária ainda pode liquidar o imposto? Fundamenta com o artigo aplicável.",
-      answer:
-        "Depende. O prazo geral de caducidade é de 5 anos, mas pode ser ampliado para 10 anos quando o retardamento da liquidação resultar de infracção. Assim, se não existir infracção que justifique a ampliação, o direito de liquidar poderá já ter caducado.",
-      answerLabel:
-        "Depende — regra geral de 5 anos, podendo ampliar para 10 anos",
+        "Se uma pessoa colectiva não fizer a declaração de rendimentos durante 6 anos, o direito da Administração Tributária de liquidar o imposto estará sempre caducado, porque o prazo geral de caducidade é de 5 anos e nunca pode ser ampliado.",
+      answer: false,
+      answerLabel: "Falso",
       explanation:
-        "O Art. 62.º estabelece o prazo geral de caducidade e prevê a ampliação quando o retardamento da liquidação resultar de infracção.",
+        "O Art. 62.º estabelece o prazo geral de caducidade de 5 anos, mas este pode ser ampliado para 10 anos quando o retardamento da liquidação resultar de infracção. Assim, é necessário verificar se existe infracção que justifique a ampliação.",
     },
 
     {
       id: "11.7",
       number: 7,
-      type: "open",
+      type: "multiple_choice",
       question:
-        "Explica, com as tuas palavras, por que motivo o CGT distingue caducidade (prazo para liquidar) de prescrição (prazo para cobrar), e qual a razão prática dessa distinção para a segurança jurídica do contribuinte.",
-      answer:
-        "A caducidade limita o período durante o qual a Administração Tributária pode liquidar ou fixar a dívida tributária. A prescrição limita o período durante o qual pode cobrar uma dívida que já foi liquidada. A distinção impede que o contribuinte fique indefinidamente sujeito à actuação da Administração, promovendo segurança e certeza jurídica.",
-      answerLabel: "Resposta livre",
+        "Qual das seguintes opções explica correctamente a diferença entre caducidade e prescrição no âmbito tributário?",
+      options: [
+        {
+          id: "a",
+          label: "a)",
+          text: "A caducidade limita o prazo para cobrar uma dívida já liquidada, enquanto a prescrição limita o prazo para criar novos impostos.",
+        },
+        {
+          id: "b",
+          label: "b)",
+          text: "A caducidade limita o período para a Administração liquidar ou fixar a dívida tributária, enquanto a prescrição limita o período para cobrar uma dívida já liquidada.",
+        },
+        {
+          id: "c",
+          label: "c)",
+          text: "Caducidade e prescrição são exactamente a mesma coisa e têm sempre o mesmo prazo.",
+        },
+        {
+          id: "d",
+          label: "d)",
+          text: "A prescrição aplica-se apenas às infracções tributárias, enquanto a caducidade se aplica exclusivamente às multas.",
+        },
+      ],
+      answer: "b",
+      answerLabel:
+        "b) A caducidade limita o período para a Administração liquidar ou fixar a dívida tributária, enquanto a prescrição limita o período para cobrar uma dívida já liquidada.",
       explanation:
-        "Pontos essenciais: caducidade está relacionada com o direito de liquidar; prescrição está relacionada com o direito de cobrar uma dívida já liquidada. Ambas estabelecem limites temporais à actuação da Administração Tributária.",
+        "A caducidade está relacionada com o direito de liquidar; a prescrição está relacionada com o direito de cobrar uma dívida já liquidada. Ambas estabelecem limites temporais à actuação da Administração Tributária e promovem segurança e certeza jurídica.",
     },
   ],
 };

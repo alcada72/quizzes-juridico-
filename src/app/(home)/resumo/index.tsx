@@ -1,6 +1,6 @@
 import colors from "@/constants/colors";
-import { resumoCGT } from "@/constants/questionst/resume";
-import type { SummaryCategory } from "@/constants/questionst/resume/types";
+import { resumoCGT } from "@/constants/questionst_cgt/resume";
+import type { SummaryCategory } from "@/constants/questionst_cgt/resume/types";
 import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { useMemo, useState } from "react";
