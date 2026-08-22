@@ -1,12 +1,10 @@
-export type SummaryCategory =
-  "prazos" | "juros" | "percentagens" | "valores" | "procedimentos";
 
 export type SummaryItem = {
   id: string;
   label: string;
   value: string;
   article?: string;
-  category: SummaryCategory;
+  category: any;
   description?: string;
 };
 

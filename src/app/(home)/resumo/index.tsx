@@ -1,12 +1,12 @@
 import colors from "@/constants/colors";
 import { resumoCGT } from "@/constants/questionst_cgt/resume";
-import type { SummaryCategory } from "@/constants/questionst_cgt/resume/types";
+
 import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { useMemo, useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 
-type Filter = SummaryCategory | "all";
+type Filter = any | "all";
 
 const filters: {
   id: Filter;
@@ -41,7 +41,7 @@ const filters: {
 ];
 
 const categoryInfo: Record<
-  SummaryCategory,
+  any,
   {
     title: string;
     icon: keyof typeof Feather.glyphMap;
@@ -109,7 +109,7 @@ export default function Page() {
       ];
     }
 
-    const groups = new Map<SummaryCategory, typeof filteredItems>();
+    const groups = new Map<any, typeof filteredItems>();
 
     filteredItems.forEach((item) => {
       const current = groups.get(item.category) ?? [];
@@ -144,7 +144,7 @@ export default function Page() {
               Revisão rápida
             </Text>
 
-            <Text className="mt-1 text-base font-medium text-indigo-500">
+            <Text className="mt-1 text-base font-medium text-blue-500">
               Consulte os pontos mais importantes do CGT
             </Text>
           </View>
@@ -193,7 +193,7 @@ export default function Page() {
                 key={filter.id}
                 onPress={() => setActiveFilter(filter.id)}
                 className={`flex-row items-center rounded-full px-4 py-2.5 ${
-                  active ? "bg-indigo-600" : "border border-slate-200 bg-white"
+                  active ? "bg-blue-600" : "border border-slate-200 bg-white"
                 }`}
               >
                 <Feather
@@ -235,7 +235,7 @@ export default function Page() {
             </Text>
           </View>
 
-          <View className="size-11 items-center justify-center rounded-2xl bg-indigo-100">
+          <View className="size-11 items-center justify-center rounded-2xl bg-blue-100">
             <Feather
               name={
                 activeFilter === "all"
@@ -243,7 +243,7 @@ export default function Page() {
                   : categoryInfo[activeFilter].icon
               }
               size={21}
-              color="#4f46e5"
+              color="#2563eb"
             />
           </View>
         </View>
@@ -264,11 +264,11 @@ export default function Page() {
                 {/* Category title */}
                 {activeFilter === "all" && (
                   <View className="mb-3 flex-row items-center">
-                    <View className="size-9 items-center justify-center rounded-xl bg-indigo-100">
+                    <View className="size-9 items-center justify-center rounded-xl bg-blue-100">
                       <Feather
                         name={categoryInfo[group.category].icon}
                         size={18}
-                        color="#4f46e5"
+                        color="#2563eb"
                       />
                     </View>
 
@@ -289,7 +289,7 @@ export default function Page() {
 
         {/* Footer tip */}
         {filteredItems.length > 0 && (
-          <View className="mt-2 rounded-3xl bg-indigo-600 p-5">
+          <View className="mt-2 rounded-3xl bg-blue-600 p-5">
             <View className="flex-row items-start">
               <View className="mr-4 size-11 items-center justify-center rounded-2xl bg-white/15">
                 <Feather name="info" size={21} color={colors.white} />
@@ -300,7 +300,7 @@ export default function Page() {
                   Dica de estudo
                 </Text>
 
-                <Text className="mt-1 text-sm leading-5 text-indigo-100">
+                <Text className="mt-1 text-sm leading-5 text-blue-100">
                   Tenta memorizar primeiro os números e depois associa cada um
                   ao respectivo artigo do Código Geral Tributário.
                 </Text>
@@ -333,7 +333,7 @@ function SummaryCard({ item }: { item: (typeof resumoCGT.items)[number] }) {
         </View>
 
         {/* Main value */}
-        <Text className="mt-4 text-3xl font-black text-indigo-600">
+        <Text className="mt-4 text-3xl font-black text-blue-600">
           {item.value}
         </Text>
 
@@ -381,7 +381,7 @@ function EmptyState({
 
       <Pressable
         onPress={onClear}
-        className="mt-5 rounded-2xl bg-indigo-600 px-5 py-3"
+        className="mt-5 rounded-2xl bg-blue-600 px-5 py-3"
       >
         <Text className="font-bold text-white">Limpar filtros</Text>
       </Pressable>
