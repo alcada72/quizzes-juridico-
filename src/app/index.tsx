@@ -1,4 +1,3 @@
-import colors from "@/constants/colors";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
@@ -19,9 +18,9 @@ export default function Index() {
       style={{ flex: 1 }}
       className="flex items-center justify-center bg-blue-600 gap-3"
     >
-      <StatusBar backgroundColor={colors.primary} style="light" />
+      <StatusBar style="light" />
 
-      <Text className="text-5xl font-bold text-white">Quiz CGT</Text>
+      <Text className="text-4xl font-bold text-white">Legislação Fiscal</Text>
       <ActivityIndicator color={"#fff"} size={"large"} />
     </View>
   );

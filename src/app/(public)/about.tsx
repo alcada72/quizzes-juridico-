@@ -1,14 +1,13 @@
 import colors from "@/constants/colors";
 import { Feather } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
 import { ScrollView, Text, View } from "react-native";
 
 export default function AboutScreen() {
   return (
-    <View className="flex-1 bg-slate-50">
-      <StatusBar backgroundColor={colors.primary} style="light" />
-
-      {/* Header */}
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerClassName=" pb-10"
+    >
       <View
         className="bg-blue-600 px-5 pb-8 pt-6"
         style={{
@@ -26,17 +25,13 @@ export default function AboutScreen() {
           </Text>
 
           <Text className="mt-2 text-center text-base font-medium text-blue-100">
-            Aprenda, pratique e revise a legislação tributária angolana.
+            Aprenda, pratique e revise a Legislação Fiscal angolana.
           </Text>
         </View>
       </View>
-
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerClassName="px-5 pb-10"
-      >
+      <View className="px-5">
         {/* About */}
-        <View className="mt-6 rounded-3xl border border-slate-200 bg-white p-5">
+        <View className="mt-6  rounded-3xl border border-slate-200 bg-white p-5">
           <View className="flex-row items-center">
             <View className="size-11 items-center justify-center rounded-2xl bg-blue-100">
               <Feather name="info" size={22} color="#2563eb" />
@@ -49,7 +44,7 @@ export default function AboutScreen() {
 
           <Text className="mt-4 text-base leading-6 text-slate-600">
             Esta aplicação foi desenvolvida para facilitar o estudo e a revisão
-            de conteúdos relacionados à legislação tributária de Angola.
+            de conteúdos relacionados à Legislação Fiscal de Angola.
           </Text>
 
           <Text className="mt-3 text-base leading-6 text-slate-600">
@@ -60,7 +55,7 @@ export default function AboutScreen() {
         </View>
 
         {/* Funcionalidades */}
-        <View className="mt-4 rounded-3xl border border-slate-200 bg-white p-5">
+        <View className="mt-4  rounded-3xl border border-slate-200 bg-white p-5">
           <Text className="text-xl font-black text-slate-800">
             O que podes fazer?
           </Text>
@@ -91,7 +86,7 @@ export default function AboutScreen() {
         </View>
 
         {/* Conteúdos */}
-        <View className="mt-4 rounded-3xl border border-slate-200 bg-white p-5">
+        <View className="mt-4 hidden rounded-3xl border border-slate-200 bg-white p-5">
           <Text className="text-xl font-black text-slate-800">
             Conteúdos disponíveis
           </Text>
@@ -140,7 +135,7 @@ export default function AboutScreen() {
 
           <Text className="mt-5 text-center text-base leading-6 text-slate-600">
             Esta aplicação nasceu com o objetivo de tornar o estudo da
-            legislação tributária angolana mais simples, prático e acessível.
+            Legislação Fiscal angolana mais simples, prático e acessível.
           </Text>
 
           <Text className="mt-3 text-center text-base leading-6 text-slate-600">
@@ -183,23 +178,23 @@ export default function AboutScreen() {
 
               <Text className="mt-1 text-sm leading-5 text-yellow-700">
                 Esta aplicação tem finalidade educativa. Para questões jurídicas
-                ou tributárias concretas, consulta sempre a legislação oficial e
+                ou fiscais concretas, consulta sempre a legislação oficial e
                 fontes competentes.
               </Text>
             </View>
           </View>
         </View>
+      </View>
 
-        {/* Version */}
-        <View className="mt-6 items-center">
-          <Text className="text-sm font-bold text-slate-500">Versão 1.0.0</Text>
+      {/* Version */}
+      <View className="mt-6 items-center">
+        <Text className="text-sm font-bold text-slate-500">Versão 1.0.0</Text>
 
-          <Text className="mt-1 text-xs text-slate-400">
-            Desenvolvido para fins educativos
-          </Text>
-        </View>
-      </ScrollView>
-    </View>
+        <Text className="mt-1 text-xs text-slate-400">
+          Desenvolvido para fins educativos
+        </Text>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -207,11 +202,11 @@ function Feature({
   icon,
   title,
   description,
-}: {
+}: Readonly<{
   icon: keyof typeof Feather.glyphMap;
   title: string;
   description: string;
-}) {
+}>) {
   return (
     <View className="mt-5 flex-row items-start">
       <View className="size-10 items-center justify-center rounded-xl bg-blue-50">
@@ -233,11 +228,11 @@ function ContentItem({
   icon,
   title,
   description,
-}: {
+}: Readonly<{
   icon: keyof typeof Feather.glyphMap;
   title: string;
   description: string;
-}) {
+}>) {
   return (
     <View className="flex-row items-center rounded-2xl bg-slate-50 p-4">
       <View className="size-11 items-center justify-center rounded-xl bg-blue-100">

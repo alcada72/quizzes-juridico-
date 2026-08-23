@@ -12,6 +12,7 @@ import {
   ScrollView,
   Text,
   TextInput,
+  Vibration,
   View,
 } from "react-native";
 
@@ -22,12 +23,6 @@ type AnswerStatus = "idle" | "correct" | "wrong" | "timeout";
 export default function Page() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  /*
-   * Procura o bloco dentro de todos os questionários:
-   *
-   * - Código Geral Tributário
-   * - Imposto Industrial em Angola
-   */
   const quiz = useMemo(() => {
     for (const menu of Object.values(Quiz_Menu)) {
       const bloco = menu.questions_quis[id];
@@ -63,7 +58,7 @@ export default function Page() {
   const questionPoints = useMemo(() => {
     if (timeRemaining <= 0) return 0;
 
-    const base = 100;
+    const base = 20;
     const timeBonus = timeRemaining * 5;
 
     return base + timeBonus;
@@ -184,7 +179,7 @@ export default function Page() {
 
       setAnswerStatus("wrong");
       setWrongAnswers(newWrong);
-
+      Vibration.vibrate();
       setTimeout(() => {
         goToNextQuestion(newScore, newCorrect, newWrong);
       }, 5000);
@@ -205,7 +200,7 @@ export default function Page() {
 
   const handleTimeout = useCallback(() => {
     if (answerStatus !== "idle") return;
-
+    Vibration.vibrate();
     setAnswerStatus("timeout");
     setIsAnswering(true);
 

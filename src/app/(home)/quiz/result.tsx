@@ -2,7 +2,6 @@ import colors from "@/constants/colors";
 import { getUsername } from "@/service/user.service";
 import { Feather } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
@@ -36,8 +35,6 @@ export default function ResultScreen() {
 
   return (
     <View className="flex-1 bg-slate-50">
-      <StatusBar backgroundColor={colors.primary} style="light" />
-
       <View
         className="absolute left-0 top-0 h-[280px] w-full"
         style={{
@@ -50,10 +47,11 @@ export default function ResultScreen() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerClassName="px-5 pb-10 pt-8"
+        overScrollMode="never"
       >
         <View className="items-center">
           <View className="mb-3 size-14 items-center justify-center rounded-full bg-white/20">
-            <Feather name="award" size={30} color={colors.white} />
+            <Feather name="award" size={30} color={"#facc15"} />
           </View>
 
           <Text className="text-3xl font-black text-white">
@@ -66,14 +64,20 @@ export default function ResultScreen() {
         </View>
 
         <View className="mt-10 items-center rounded-[32px] bg-white px-6 py-8 shadow-sm">
+          <Text
+            numberOfLines={2}
+            className="text-2xl font-bold text-center text-blue-600"
+          >
+            {username}
+          </Text>
           <Text className="text-sm font-bold uppercase tracking-wider text-slate-400">
             Sua pontuação
           </Text>
 
           <View className="mt-5 size-48 items-center justify-center rounded-full border-[12px] border-indigo-100">
-            <View className="absolute size-36 items-center justify-center rounded-full border-4 border-yellow-400">
+            <View className="absolute size-40 items-center justify-center rounded-full border-4 border-yellow-400">
               <Text className="text-5xl font-black text-indigo-600">
-                {percentage}%
+                {percentage.toFixed(1)}%
               </Text>
 
               <Text className="mt-1 text-sm font-medium text-slate-400">
@@ -92,7 +96,6 @@ export default function ResultScreen() {
         </View>
 
         <View className="mt-5 flex-row gap-3">
-          {/* Correct */}
           <View className="flex-1 items-center rounded-2xl bg-white p-5">
             <View className="size-11 items-center justify-center rounded-full bg-green-100">
               <Feather name="check" size={22} color="#16a34a" />

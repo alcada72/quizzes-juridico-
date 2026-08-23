@@ -77,10 +77,10 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
   const displayName = username.trim();
 
   return (
-    <View className="flex-row items-center justify-between">
+    <View className="flex-row items-center justify-between px-5 bg-blue-600 py-3">
       {/* Greeting */}
       <View className="flex-1 pr-4">
-        <Text className="text-sm font-medium text-slate-500">
+        <Text className="text-sm font-medium text-slate-300">
           Bem-vindo de volta
         </Text>
 
@@ -119,7 +119,7 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
             <View className="flex-row items-center">
               <Text
                 numberOfLines={1}
-                className="max-w-[240px] text-2xl font-black text-slate-900"
+                className="max-w-[240px] text-2xl font-black text-slate-100"
               >
                 Olá, {displayName} 👋
               </Text>
@@ -127,7 +127,7 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
               <FontAwesome
                 name="pencil"
                 size={14}
-                color={colors.primary}
+                color={colors.white}
                 style={{ marginLeft: 8 }}
               />
             </View>
@@ -141,7 +141,7 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
         accessibilityLabel="Abrir perfil"
         className=" items-center justify-center   active:opacity-70"
       >
-        <FontAwesome name="info-circle" size={25} color={colors.primary} />
+        <FontAwesome name="info-circle" size={25} color={colors.white} />
       </Pressable>
     </View>
   );

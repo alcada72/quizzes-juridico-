@@ -187,7 +187,7 @@ export default function Page() {
           <View>
             <Text className="text-xl font-black text-slate-800">
               {activeFilter === "all"
-                ? "Resumo do CGT"
+                ? Resumos[resumeId].title
                 : categoryInfo[activeFilter]?.title}
             </Text>
             <Text className="mt-0.5 text-xs font-medium text-slate-500">
@@ -271,7 +271,7 @@ export default function Page() {
   );
 }
 
-function SummaryCard({ item }: { item: SummaryItem }) {
+function SummaryCard({ item }: Readonly<{ item: SummaryItem }>) {
   return (
     <View className="mb-3 overflow-hidden rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
       <View className="flex-row items-start justify-between">

@@ -21,15 +21,14 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.backGround }}>
-      <StatusBar style="dark" />
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
+      <StatusBar style="light" />
       <Stack
         screenOptions={{
           headerShown: false,
           contentStyle: { flex: 1, backgroundColor: colors.backGround },
         }}
       />
-      ;
     </SafeAreaView>
   );
 }

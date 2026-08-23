@@ -1,10 +1,13 @@
 import colors from "@/constants/colors";
+import { Resumos } from "@/constants/resumos";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
-export function MainCard({ resumeId }: { resumeId: string }) {
+export function MainCard({ resumeId }: Readonly<{ resumeId: string }>) {
   const router = useRouter();
+
+  const haveResume = !!Resumos[resumeId];
 
   return (
     <View className=" overflow-hidden rounded-3xl bg-blue-600 p-6">
@@ -28,7 +31,10 @@ export function MainCard({ resumeId }: { resumeId: string }) {
         Antes de testar os seus conhecimentos.
       </Text>
 
-      <View className="mt-6 flex-row items-center gap-3">
+      <View
+        style={{ display: haveResume ? "flex" : "none" }}
+        className="mt-6 flex-row items-center gap-3"
+      >
         <Pressable
           className="flex-1 flex-row items-center hidden justify-center rounded-2xl bg-white px-4 py-4 active:opacity-80"
           onPress={() => router.push("/(home)/quiz")}
