@@ -1,6 +1,7 @@
 import colors from "@/constants/colors";
 import { Feather } from "@expo/vector-icons";
-import { ScrollView, Text, View } from "react-native";
+import Constants from "expo-constants";
+import { Pressable, ScrollView, Text, View } from "react-native";
 
 export default function AboutScreen() {
   return (
@@ -9,10 +10,11 @@ export default function AboutScreen() {
       contentContainerClassName=" pb-10"
     >
       <View
-        className="bg-blue-600 px-5 pb-8 pt-6"
+        className=" px-5 pb-8 pt-6"
         style={{
           borderBottomLeftRadius: 40,
           borderBottomRightRadius: 40,
+          backgroundColor: colors.primary,
         }}
       >
         <View className="items-center">
@@ -34,7 +36,7 @@ export default function AboutScreen() {
         <View className="mt-6  rounded-3xl border border-slate-200 bg-white p-5">
           <View className="flex-row items-center">
             <View className="size-11 items-center justify-center rounded-2xl bg-blue-100">
-              <Feather name="info" size={22} color="#2563eb" />
+              <Feather name="info" size={22} color={colors.primary} />
             </View>
 
             <Text className="ml-3 text-xl font-black text-slate-800">
@@ -48,8 +50,8 @@ export default function AboutScreen() {
           </Text>
 
           <Text className="mt-3 text-base leading-6 text-slate-600">
-            Através de quizzes, resumos e acompanhamento do progresso, podes
-            testar os teus conhecimentos e reforçar os conteúdos mais
+            Através de questionários, resumos e acompanhamento do progresso,
+            podes testar os teus conhecimentos e reforçar os conteúdos mais
             importantes.
           </Text>
         </View>
@@ -62,7 +64,7 @@ export default function AboutScreen() {
 
           <Feature
             icon="help-circle"
-            title="Responder a quizzes"
+            title="Responder o questionário"
             description="Testa os teus conhecimentos através de perguntas de escolha múltipla, verdadeiro ou falso e perguntas abertas."
           />
 
@@ -75,7 +77,7 @@ export default function AboutScreen() {
           <Feature
             icon="trending-up"
             title="Acompanhar o progresso"
-            description="Consulta a tua pontuação, XP, respostas corretas e evolução nos quizzes."
+            description="Consulta a tua pontuação, XP, respostas corretas e evolução nos questionários."
           />
 
           <Feature
@@ -110,7 +112,7 @@ export default function AboutScreen() {
         <View className="mt-4 rounded-3xl border border-slate-200 bg-white p-5">
           <View className="flex-row items-center">
             <View className="size-11 items-center justify-center rounded-2xl bg-blue-100">
-              <Feather name="user" size={22} color="#2563eb" />
+              <Feather name="user" size={22} color={colors.primary} />
             </View>
 
             <Text className="ml-3 text-xl font-black text-slate-800">
@@ -120,7 +122,10 @@ export default function AboutScreen() {
 
           <View className="mt-5 items-center">
             {/* Foto/Avatar */}
-            <View className="size-24 items-center justify-center rounded-full bg-blue-600">
+            <View
+              style={{ backgroundColor: colors.primary, borderRadius: 99999 }}
+              className="size-24 items-center justify-center rounded-full"
+            >
               <Feather name="user" size={42} color={colors.white} />
             </View>
 
@@ -128,20 +133,25 @@ export default function AboutScreen() {
               Eng. Joaquim Lofa
             </Text>
 
-            <Text className="mt-1 text-center text-sm font-medium text-blue-600">
+            <Text
+              style={{ color: colors.primary }}
+              className="mt-1 text-center text-sm font-medium"
+            >
               Desenvolvedor da aplicação
             </Text>
           </View>
 
           <Text className="mt-5 text-center text-base leading-6 text-slate-600">
-            Esta aplicação nasceu com o objetivo de tornar o estudo da
-            Legislação Fiscal angolana mais simples, prático e acessível.
+            Esta aplicação nasceu como parte do projecto da turma
+            <Text className="font-black"> AQUISIÇÃO ESPECIAL</Text> com o
+            objetivo de tornar o estudo da Legislação Fiscal angolana mais
+            simples, prático e acessível.
           </Text>
 
           <Text className="mt-3 text-center text-base leading-6 text-slate-600">
             A ideia é transformar o estudo tradicional em uma experiência mais
-            interativa, permitindo aprender através de quizzes, revisões rápidas
-            e acompanhamento do progresso.
+            interativa, permitindo aprender através de questionários, revisões
+            rápidas e acompanhamento do progresso.
           </Text>
 
           {/* Contactos / Links */}
@@ -158,7 +168,42 @@ export default function AboutScreen() {
               <Feather name="mail" size={18} color="#334155" />
 
               <Text className="ml-2 text-sm font-bold text-slate-700">
-                joaquinlofa@gmail.com
+                joaquimlofa@gmail.com
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Comunidade */}
+        <View className="mt-4 rounded-3xl border border-slate-200 bg-white p-5">
+          <View className="flex-row items-center">
+            <View className="size-11 items-center justify-center rounded-2xl bg-blue-100">
+              <Feather name="users" size={22} color={colors.primary} />
+            </View>
+
+            <Text className="ml-3 text-xl font-black text-slate-800">
+              Comunidade
+            </Text>
+          </View>
+
+          <View className="mt-5 gap-1">
+            <Text className="text-lg mb-3 text-slate-600">
+              Quero dixar o meu agredecimento especial a 3 pessoas que foram
+              fundamentais:
+            </Text>
+            <ComunitPerson name="Valdik Hone" dec="Pelo idealismo e visão" />
+            <ComunitPerson
+              name="João Lucas"
+              dec="Por dar vida vidas com o conteudo"
+            />
+            <ComunitPerson
+              name="Rosimer Praia"
+              dec="Pela inspiração e motivação"
+            />
+            <View className="rounded-lg bg-gray-200 p-2 mt-3">
+              <Text className="text-base mb-3 text-slate-900">
+                E obrigado a toda turma AQUISIÇÃO ESPECIAL. Sem vocês, nada
+                disso seria possivel.
               </Text>
             </View>
           </View>
@@ -188,7 +233,9 @@ export default function AboutScreen() {
 
       {/* Version */}
       <View className="mt-6 items-center">
-        <Text className="text-sm font-bold text-slate-500">Versão 1.0.0</Text>
+        <Text className="text-sm font-bold text-slate-500">
+          Versão {Constants.expoConfig?.version}
+        </Text>
 
         <Text className="mt-1 text-xs text-slate-400">
           Desenvolvido para fins educativos
@@ -210,7 +257,7 @@ function Feature({
   return (
     <View className="mt-5 flex-row items-start">
       <View className="size-10 items-center justify-center rounded-xl bg-blue-50">
-        <Feather name={icon} size={19} color="#2563eb" />
+        <Feather name={icon} size={19} color={colors.primary} />
       </View>
 
       <View className="ml-3 flex-1">
@@ -236,13 +283,34 @@ function ContentItem({
   return (
     <View className="flex-row items-center rounded-2xl bg-slate-50 p-4">
       <View className="size-11 items-center justify-center rounded-xl bg-blue-100">
-        <Feather name={icon} size={21} color="#2563eb" />
+        <Feather name={icon} size={21} color={colors.primary} />
       </View>
 
       <View className="ml-3 flex-1">
         <Text className="font-bold text-slate-800">{title}</Text>
 
         <Text className="mt-1 text-sm text-slate-500">{description}</Text>
+      </View>
+    </View>
+  );
+}
+
+function ComunitPerson({ name, dec }: Readonly<{ name: string; dec: string }>) {
+  return (
+    <View>
+      <Pressable className="flex-row items-center gap-2">
+        <Feather
+          name="user"
+          size={18}
+          color={colors.primary}
+          className="p-2 bg-slate-200 rounded-full"
+        />
+        <Text className="text-lg font-bold text-gray-700">{name}</Text>
+      </Pressable>
+      <View className="pl-12">
+        <Text className="text-lg text-slate-600 font-normal text-start">
+          {dec}
+        </Text>
       </View>
     </View>
   );

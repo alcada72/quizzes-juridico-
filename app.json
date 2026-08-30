@@ -2,7 +2,7 @@
   "expo": {
     "name": "Legislação Fiscal",
     "slug": "quiz_CGT",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "quizcgt",

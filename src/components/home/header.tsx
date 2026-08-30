@@ -77,7 +77,7 @@ export function HeaderHome({ name = "", onNameChange }: HeaderHomeProps) {
   const displayName = username.trim();
 
   return (
-    <View className="flex-row items-center justify-between px-5 bg-blue-600 py-3">
+    <View className="flex-row items-center justify-between px-5 bg-blue-950 py-3">
       {/* Greeting */}
       <View className="flex-1 pr-4">
         <Text className="text-sm font-medium text-slate-300">

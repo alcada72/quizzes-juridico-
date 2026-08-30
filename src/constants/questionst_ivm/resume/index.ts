@@ -486,5 +486,3 @@ export const resumoIVM: QuizSummary = {
     },
   ],
 };
-
-export default resumoIVM;

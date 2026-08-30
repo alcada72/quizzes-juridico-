@@ -1,37 +1,34 @@
 import colors from "@/constants/colors";
-import { clearQuizDataPoints } from "@/service/points.service";
+import {
+  clearQuizDataPoints,
+  getProgress,
+  QuizProgress,
+} from "@/service/points.service";
 import { Feather } from "@expo/vector-icons";
+import { useEffect, useState } from "react";
 import { Alert, Pressable, Text, View } from "react-native";
-import { useState } from "react";
 
-type ProgressCardProps = {
-  totalXP: number;
-  quizzesCompleted: number;
-  bestScore: number;
-  correctAnswers: number;
-  totalQuestions: number;
-};
-
-export function ProgressCard({
-  totalXP,
-  quizzesCompleted,
-  bestScore,
-  correctAnswers,
-  totalQuestions,
-}: Readonly<ProgressCardProps>) {
-  const [progress, setProgress] = useState({
-    totalXP,
-    quizzesCompleted,
-    bestScore,
-    correctAnswers,
-    totalQuestions,
+export function ProgressCard() {
+  const [progress, setProgress] = useState<QuizProgress>({
+    bestScore: 0,
+    correctAnswers: 0,
+    quizzesCompleted: 0,
+    totalQuestions: 0,
+    totalXP: 0,
   });
 
+  useEffect(() => {
+    const loadUser = async () => {
+      const resProgress = await getProgress();
+      setProgress(resProgress);
+    };
+
+    loadUser();
+  }, []);
+
   const accuracy =
-    progress.totalQuestions > 0
-      ? Math.round(
-          (progress.correctAnswers / progress.totalQuestions) * 100,
-        )
+    progress?.totalQuestions > 0
+      ? Math.round((progress?.correctAnswers / progress?.totalQuestions) * 100)
       : 0;
 
   const handleResetProgress = () => {
@@ -72,14 +69,14 @@ export function ProgressCard({
         </View>
       </View>
 
-      <View className="rounded-3xl bg-blue-600  p-5">
+      <View className="rounded-3xl bg-blue-950  p-5">
         <View className="flex-row justify-between">
           {/* XP */}
           <View className="flex-1">
             <Text className="text-sm font-medium text-slate-200">XP total</Text>
 
             <Text className="mt-1 text-2xl font-black text-gray-100">
-              {progress.totalXP || 0}
+              {progress.totalXP}
             </Text>
           </View>
 
@@ -88,7 +85,7 @@ export function ProgressCard({
             <Text className="text-sm font-medium text-slate-200">Quizzes</Text>
 
             <Text className="mt-1 text-2xl font-black text-gray-100">
-              {progress.quizzesCompleted || 0}
+              {String(progress.quizzesCompleted).padStart(2, "0")}
             </Text>
           </View>
 
@@ -97,7 +94,7 @@ export function ProgressCard({
             <Text className="text-sm font-medium text-slate-200">Melhor</Text>
 
             <Text className="mt-1 text-2xl font-black text-gray-100">
-              {progress.bestScore || 0}%
+              {progress.bestScore.toFixed(1)}%
             </Text>
           </View>
         </View>

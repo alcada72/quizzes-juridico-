@@ -55,7 +55,7 @@ export default function ResultScreen() {
           </View>
 
           <Text className="text-3xl font-black text-white">
-            Quiz concluído! 🎉
+            questionário concluído! 🎉
           </Text>
 
           <Text className="mt-2 text-center text-base text-indigo-200">
@@ -66,7 +66,8 @@ export default function ResultScreen() {
         <View className="mt-10 items-center rounded-[32px] bg-white px-6 py-8 shadow-sm">
           <Text
             numberOfLines={2}
-            className="text-2xl font-bold text-center text-blue-600"
+            style={{ color: colors.primary }}
+            className="text-2xl font-bold text-center "
           >
             {username}
           </Text>
@@ -74,9 +75,15 @@ export default function ResultScreen() {
             Sua pontuação
           </Text>
 
-          <View className="mt-5 size-48 items-center justify-center rounded-full border-[12px] border-indigo-100">
+          <View
+            style={{ borderColor: colors.primary }}
+            className="mt-5 size-48 items-center justify-center rounded-full border-[12px] "
+          >
             <View className="absolute size-40 items-center justify-center rounded-full border-4 border-yellow-400">
-              <Text className="text-5xl font-black text-indigo-600">
+              <Text
+                style={{ color: colors.primary }}
+                className="text-4xl font-black "
+              >
                 {percentage.toFixed(1)}%
               </Text>
 
@@ -145,8 +152,9 @@ export default function ResultScreen() {
 
         <View className="mt-7 gap-3">
           <Pressable
+            style={{ backgroundColor: colors.primary }}
             onPress={() => router.replace(`/(home)/quiz/${id}`)}
-            className="flex-row items-center justify-center rounded-2xl bg-indigo-600 py-4 active:opacity-80"
+            className="flex-row items-center justify-center rounded-2xl py-4 active:opacity-80"
           >
             <Feather name="refresh-cw" size={20} color={colors.white} />
 
@@ -157,11 +165,15 @@ export default function ResultScreen() {
 
           <Pressable
             onPress={() => router.replace(`/(home)`)}
-            className="flex-row items-center justify-center rounded-2xl border-2 border-indigo-600 bg-transparent py-4 active:opacity-70"
+            style={{ borderColor: colors.primary }}
+            className="flex-row items-center justify-center rounded-2xl border-2 bg-transparent py-4 active:opacity-70"
           >
             <Feather name="home" size={20} color={colors.primary} />
 
-            <Text className="ml-2 text-lg font-bold text-indigo-600">
+            <Text
+              style={{ color: colors.primary }}
+              className="ml-2 text-lg font-bold text-indigo-600"
+            >
               Voltar ao início
             </Text>
           </Pressable>

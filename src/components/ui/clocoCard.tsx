@@ -1,3 +1,4 @@
+import colors from "@/constants/colors";
 import React from "react";
 import { Pressable, Text } from "react-native";
 
@@ -21,7 +22,11 @@ export function BlocoCard({
       onPress={() => onClick?.()}
       className="w-[48%] rounded-2xl bg-white p-4 shadow-sm justify-between"
     >
-      <Text numberOfLines={3} className="text-2xl font-bold text-blue-600">
+      <Text
+        style={{ color: colors.primary }}
+        numberOfLines={3}
+        className="text-2xl font-bold"
+      >
         {title}
       </Text>
       {!!desc && <Text className="mt-4 font-bold text-slate-900">{desc}</Text>}

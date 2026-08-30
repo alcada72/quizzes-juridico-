@@ -1,5 +1,6 @@
 import { MainCard } from "@/components/home/mainCard";
 import { BlocoCard } from "@/components/ui/clocoCard";
+import colors from "@/constants/colors";
 import { Quiz_Menu, QuizMenuKey } from "@/constants/quiz_menu";
 import { router, useLocalSearchParams } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
@@ -23,7 +24,7 @@ export default function Page() {
 
   return (
     <View className="flex-1 bg-slate-50">
-      <View className="bg-blue-600 p-5">
+      <View style={{ backgroundColor: colors.primary }} className=" p-5">
         <Text numberOfLines={2} className="text-2xl font-bold text-white">
           {questionary.name}
         </Text>

@@ -27,7 +27,7 @@ export default function Page() {
         {/* Cabeçalho */}
         <View className="items-center mb-8">
           <Text className="text-3xl font-extrabold text-slate-800 text-center mb-2">
-            Olá, bem-vindo ao Quiz CGT! 👋
+            Olá, bem-vindo! 👋
           </Text>
           <Text className="text-base text-slate-500 text-center leading-6 px-2">
             Vamos acompanhar a sua caminhada no aprendizado das leis e

@@ -4,6 +4,7 @@ import { Questions_Iia } from "./questionst_iia";
 import { Questions_Ip } from "./questionst_ip";
 import { Questions_Irt } from "./questionst_irt";
 import { Questions_Ivm } from "./questionst_ivm";
+import { Questions_Rjfde } from "./questionst_rjfde";
 
 import type { Quiz } from "./types";
 
@@ -45,6 +46,10 @@ export const Quiz_Menu: Menu = {
   Questions_Ief: {
     name: "Código das Execuções Fiscais",
     questions_quis: Questions_Ief,
+  },
+  Questions_Rjfde: {
+    name: "Regime Jurídico das Facturas e Documentos Equivalentes",
+    questions_quis: Questions_Rjfde,
   },
 };
 

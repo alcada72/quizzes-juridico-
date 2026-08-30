@@ -58,8 +58,8 @@ export default function Page() {
   const questionPoints = useMemo(() => {
     if (timeRemaining <= 0) return 0;
 
-    const base = 20;
-    const timeBonus = timeRemaining * 5;
+    const base = 5;
+    const timeBonus = timeRemaining * 2;
 
     return base + timeBonus;
   }, [timeRemaining]);
@@ -367,8 +367,8 @@ export default function Page() {
         </View>
 
         {/* Question */}
-        <View className="mt-16 rounded-3xl bg-blue-600 px-5 pb-6">
-          <View className="-mt-12 self-center rounded-full border-[8px] border-blue-600 bg-slate-800 p-2">
+        <View className="mt-16 rounded-3xl bg-blue-900 px-5 pb-6">
+          <View className="-mt-12 self-center rounded-full border-[8px] border-blue-950 bg-slate-800 p-2">
             <View className="size-24 items-center justify-center rounded-full border-4 border-yellow-400">
               <Text className="text-3xl font-black text-white">
                 {timeRemaining}
@@ -561,7 +561,9 @@ export default function Page() {
           }`}
         >
           <Text className="text-lg font-bold text-white">
-            {currentNumber === totalQuestions ? "Finalizar quiz" : "Responder"}
+            {currentNumber === totalQuestions
+              ? "Finalizar questionário"
+              : "Responder"}
           </Text>
 
           <Feather

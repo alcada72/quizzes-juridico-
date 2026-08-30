@@ -10,7 +10,10 @@ export function MainCard({ resumeId }: Readonly<{ resumeId: string }>) {
   const haveResume = !!Resumos[resumeId];
 
   return (
-    <View className=" overflow-hidden rounded-3xl bg-blue-600 p-6">
+    <View
+      style={{ backgroundColor: colors.primary }}
+      className=" overflow-hidden rounded-3xl  p-6"
+    >
       {/* Badge */}
       <View className="flex-row items-center">
         <View className="mr-2 size-8 items-center justify-center rounded-xl bg-white/15">

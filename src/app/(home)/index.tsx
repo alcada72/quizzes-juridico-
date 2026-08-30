@@ -2,7 +2,6 @@ import { HeaderHome } from "@/components/home/header";
 import { ProgressCard } from "@/components/home/progressCard";
 import { BlocoCard } from "@/components/ui/clocoCard";
 import { Quiz_Menu } from "@/constants/quiz_menu";
-import { getProgress, QuizProgress } from "@/service/points.service";
 import { getUsername } from "@/service/user.service";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
@@ -13,13 +12,10 @@ export default function HomeScreen() {
   const MENU_ENTRIES = Object.entries(Quiz_Menu);
 
   const [username, setUsername] = useState("");
-  const [progress, setprogress] = useState<QuizProgress>();
 
   useEffect(() => {
     const loadUser = async () => {
       const name = await getUsername();
-      const resProgress = await getProgress();
-      setprogress(resProgress);
       if (name) {
         setUsername(name);
       }
@@ -29,21 +25,15 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <>
+    <View className="flex-1">
       <HeaderHome name={username} onNameChange={setUsername} />
 
       <ScrollView
         overScrollMode="never"
         showsVerticalScrollIndicator={false}
-        contentContainerClassName="px-5 pb-28 flex-1 bg-slate-100"
+        contentContainerClassName="px-5 pb-24 bg-slate-100"
       >
-        <ProgressCard
-          totalXP={progress?.totalXP || 0}
-          quizzesCompleted={progress?.quizzesCompleted || 0}
-          bestScore={progress?.bestScore || 0}
-          correctAnswers={progress?.correctAnswers || 0}
-          totalQuestions={progress?.totalQuestions || 0}
-        />
+        <ProgressCard />
 
         <View className="mt-8">
           <View className="mb-4 flex-row items-center justify-between">
@@ -72,6 +62,6 @@ export default function HomeScreen() {
           </View>
         </View>
       </ScrollView>
-    </>
+    </View>
   );
 }
