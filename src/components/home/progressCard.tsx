@@ -5,7 +5,8 @@ import {
   QuizProgress,
 } from "@/service/points.service";
 import { Feather } from "@expo/vector-icons";
-import { useEffect, useState } from "react";
+import { useFocusEffect } from "expo-router";
+import { useCallback, useState } from "react";
 import { Alert, Pressable, Text, View } from "react-native";
 
 export function ProgressCard() {
@@ -17,14 +18,16 @@ export function ProgressCard() {
     totalXP: 0,
   });
 
-  useEffect(() => {
-    const loadUser = async () => {
-      const resProgress = await getProgress();
-      setProgress(resProgress);
-    };
+  useFocusEffect(
+    useCallback(() => {
+      const loadUser = async () => {
+        const resProgress = await getProgress();
+        setProgress(resProgress);
+      };
 
-    loadUser();
-  }, []);
+      loadUser();
+    }, []),
+  );
 
   const accuracy =
     progress?.totalQuestions > 0

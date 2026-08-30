@@ -131,6 +131,27 @@ export const completeQuiz = async ({
   }
 };
 
+export const removePoint = async ({
+  xp,
+}: Pick<CompleteQuizParams, "xp">): Promise<QuizProgress> => {
+  try {
+    const currentProgress = await getProgress();
+
+    const newProgress: QuizProgress = {
+      ...currentProgress,
+      totalXP: currentProgress.totalXP < 0 ? 0 : currentProgress.totalXP - xp,
+    };
+
+    await storeProgress(newProgress);
+
+    return newProgress;
+  } catch (error) {
+    console.error("Erro ao finalizar quiz:", error);
+
+    return getProgress();
+  }
+};
+
 export const clearQuizDataPoints = async () => {
   try {
     await AsyncStorage.multiRemove([STORAGE_KEYS.score, STORAGE_KEYS.progress]);

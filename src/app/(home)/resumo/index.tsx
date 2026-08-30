@@ -3,7 +3,6 @@ import { SummaryItem } from "@/constants/questionst_cgt/resume/types";
 import { Resumos } from "@/constants/resumos";
 import { Feather } from "@expo/vector-icons";
 import { useLocalSearchParams } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import { useMemo, useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 
@@ -90,9 +89,6 @@ export default function Page() {
 
   return (
     <View className="flex-1 bg-slate-50">
-      <StatusBar style="dark" />
-
-      {/* Header com curva de fundo */}
       <View
         className="absolute left-0 top-0 h-[220px] w-full"
         style={{

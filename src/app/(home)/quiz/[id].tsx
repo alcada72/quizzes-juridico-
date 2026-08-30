@@ -1,6 +1,10 @@
 import colors from "@/constants/colors";
 import { Quiz_Menu } from "@/constants/quiz_menu";
-import { completeQuiz } from "@/service/points.service";
+import {
+  completeQuiz,
+  getProgress,
+  removePoint,
+} from "@/service/points.service";
 import { Feather } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -17,6 +21,8 @@ import {
 } from "react-native";
 
 const QUESTION_TIME = 20;
+const SKIP_PENALTY = 30;
+const BASE_POINT = 5;
 
 type AnswerStatus = "idle" | "correct" | "wrong" | "timeout";
 
@@ -39,12 +45,15 @@ export default function Page() {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [openAnswer, setOpenAnswer] = useState("");
   const [score, setScore] = useState(0);
+  const [currentPoint, setcurrentPoint] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [wrongAnswers, setWrongAnswers] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(QUESTION_TIME);
   const [answerStatus, setAnswerStatus] = useState<AnswerStatus>("idle");
   const [isAnswering, setIsAnswering] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+
+  const [showHelp, setShowHelp] = useState(false);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const appStateRef = useRef<AppStateStatus>(AppState.currentState);
@@ -58,7 +67,7 @@ export default function Page() {
   const questionPoints = useMemo(() => {
     if (timeRemaining <= 0) return 0;
 
-    const base = 5;
+    const base = BASE_POINT;
     const timeBonus = timeRemaining * 2;
 
     return base + timeBonus;
@@ -115,10 +124,72 @@ export default function Page() {
       setAnswerStatus("idle");
       setIsAnswering(false);
       setTimeRemaining(QUESTION_TIME);
+
+      // Fecha a ajuda ao mudar de questão
+      setShowHelp(false);
     },
     [clearTimer, currentQuestionIndex, totalQuestions, finishQuiz],
   );
 
+  const handleHelp = useCallback(() => {
+    if (isAnswering) return;
+
+    setShowHelp((previous) => !previous);
+  }, [isAnswering]);
+
+  const helpText = useMemo(() => {
+    if (!currentQuestion) return "";
+
+    switch (currentQuestion.type) {
+      case "multiple_choice":
+        return "Analise cuidadosamente cada alternativa e elimine as opções que não respondem diretamente à pergunta.";
+      case "true_false":
+        return "Preste atenção às palavras absolutas, como 'sempre', 'nunca' e 'todos'. Elas podem mudar o sentido da afirmação.";
+      case "open":
+        return "Pense nos conceitos principais relacionados à pergunta antes de escrever sua resposta.";
+      default:
+        return "";
+    }
+  }, [currentQuestion]);
+
+  const handleSkip = useCallback(async () => {
+    if (isAnswering || answerStatus !== "idle") return;
+    if (currentPoint < SKIP_PENALTY) {
+      Vibration.vibrate([0, 50, 100, 50]);
+      return;
+    }
+
+    clearTimer();
+    const newWrong = wrongAnswers + 1;
+    const newScore = Math.max(0, score - SKIP_PENALTY);
+
+    try {
+      await removePoint({ xp: SKIP_PENALTY });
+      setcurrentPoint((prev) => Math.max(0, prev - SKIP_PENALTY));
+    } catch (err) {
+      console.error("Erro ao deduzir pontos do skip:", err);
+    }
+
+    setWrongAnswers(newWrong);
+    setScore(newScore);
+    setIsAnswering(true);
+    setShowHelp(false);
+
+    Vibration.vibrate(50);
+
+    timerRef.current = setTimeout(() => {
+      goToNextQuestion(newScore, correctAnswers, newWrong);
+    }, 300);
+  }, [
+    answerStatus,
+    clearTimer,
+    correctAnswers,
+    goToNextQuestion,
+    isAnswering,
+    score,
+    currentPoint,
+    wrongAnswers,
+  ]);
   const submitAnswer = useCallback(
     (answer?: string) => {
       if (isAnswering) return;
@@ -135,6 +206,7 @@ export default function Page() {
       if (!userAnswer) return;
 
       setIsAnswering(true);
+      setShowHelp(false);
 
       let isCorrect = false;
 
@@ -180,6 +252,7 @@ export default function Page() {
       setAnswerStatus("wrong");
       setWrongAnswers(newWrong);
       Vibration.vibrate();
+
       setTimeout(() => {
         goToNextQuestion(newScore, newCorrect, newWrong);
       }, 5000);
@@ -200,9 +273,12 @@ export default function Page() {
 
   const handleTimeout = useCallback(() => {
     if (answerStatus !== "idle") return;
+
     Vibration.vibrate();
+
     setAnswerStatus("timeout");
     setIsAnswering(true);
+    setShowHelp(false);
 
     const newWrong = wrongAnswers + 1;
 
@@ -253,11 +329,20 @@ export default function Page() {
 
       appStateRef.current = nextState;
     });
-
+    getCurrentPoint();
     return () => {
       subscription.remove();
     };
   }, []);
+
+  async function getCurrentPoint() {
+    try {
+      const currentProgress = await getProgress();
+      setcurrentPoint(currentProgress.totalXP);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     return () => {
@@ -265,9 +350,6 @@ export default function Page() {
     };
   }, [clearTimer]);
 
-  /*
-   * Se o bloco não existir
-   */
   if (!quiz) {
     return (
       <View className="flex-1 items-center justify-center bg-blue-600">
@@ -366,8 +448,75 @@ export default function Page() {
           </View>
         </View>
 
+        {/* Ações: Ajuda + Pular */}
+        <View className="mt-5 flex-row items-center justify-between">
+          {/* Ajuda */}
+          <Pressable
+            disabled={isAnswering}
+            onPress={handleHelp}
+            className={`flex-row items-center rounded-xl px-4 py-2.5 ${
+              showHelp ? "bg-yellow-400" : "bg-blue-100"
+            }`}
+          >
+            <Feather
+              name="help-circle"
+              size={18}
+              color={showHelp ? colors.black : colors.primary}
+            />
+
+            <Text
+              className={`ml-2 font-bold ${
+                showHelp ? "text-slate-900" : "text-blue-700"
+              }`}
+            >
+              Ajuda
+            </Text>
+          </Pressable>
+
+          {/* Pular */}
+          <Pressable
+            disabled={isAnswering || currentPoint < SKIP_PENALTY}
+            onPress={handleSkip}
+            style={{
+              opacity: isAnswering || currentPoint < SKIP_PENALTY ? 0.4 : 1,
+            }}
+            className="flex-row items-center rounded-xl bg-white/10 px-3.5 py-2"
+          >
+            <Text className="mr-1.5 text-xs font-bold text-white">
+              Pular (-{SKIP_PENALTY} XP)
+            </Text>
+            <Feather name="skip-forward" size={14} color="#ffffff" />
+          </Pressable>
+        </View>
+
+        {/* Caixa de ajuda */}
+        {showHelp && (
+          <View className="mt-3 rounded-2xl border border-yellow-200 bg-yellow-50 p-4">
+            <View className="flex-row items-start">
+              <View className="mr-3 mt-0.5 rounded-full bg-yellow-400 p-2">
+                <Feather name="zap" size={16} color={colors.black} />
+              </View>
+
+              <View className="flex-1">
+                <Text className="text-sm font-black text-yellow-900">Dica</Text>
+
+                <Text className="mt-1 text-sm leading-5 text-yellow-800">
+                  {helpText}
+                </Text>
+              </View>
+
+              <Pressable
+                onPress={() => setShowHelp(false)}
+                className="ml-2 p-1"
+              >
+                <Feather name="x" size={18} color="#92400e" />
+              </Pressable>
+            </View>
+          </View>
+        )}
+
         {/* Question */}
-        <View className="mt-16 rounded-3xl bg-blue-900 px-5 pb-6">
+        <View className="mt-6 rounded-3xl bg-blue-900 px-5 pb-6">
           <View className="-mt-12 self-center rounded-full border-[8px] border-blue-950 bg-slate-800 p-2">
             <View className="size-24 items-center justify-center rounded-full border-4 border-yellow-400">
               <Text className="text-3xl font-black text-white">
