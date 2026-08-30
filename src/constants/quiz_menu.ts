@@ -1,4 +1,5 @@
 import { Questions_cgt } from "./questionst_cgt";
+import { Questions_Cpt } from "./questionst_cpt";
 import { Questions_Ief } from "./questionst_ief";
 import { Questions_Iia } from "./questionst_iia";
 import { Questions_Ip } from "./questionst_ip";
@@ -40,7 +41,7 @@ export const Quiz_Menu: Menu = {
   },
 
   Questions_Ip: {
-    name: "Imposto Predial",
+    name: "Código Imposto Predial",
     questions_quis: Questions_Ip,
   },
   Questions_Ief: {
@@ -51,6 +52,10 @@ export const Quiz_Menu: Menu = {
     name: "Regime Jurídico das Facturas e Documentos Equivalentes",
     questions_quis: Questions_Rjfde,
   },
+  Questions_Cpt: {
+    name: "Código do Processo Tributário de Angola",
+    questions_quis: Questions_Cpt,
+  }
 };
 
 export type QuizMenuKey = keyof typeof Quiz_Menu;

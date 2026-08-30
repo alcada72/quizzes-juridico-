@@ -1,5 +1,6 @@
 import { resumoCGT } from "./questionst_cgt/resume";
 import { QuizSummary } from "./questionst_cgt/resume/types";
+import { resumoCPT } from "./questionst_cpt/resume";
 import { resumoII } from "./questionst_iia/resume";
 import { resumoIRT } from "./questionst_ip/resume";
 import { resumoIVM } from "./questionst_ivm/resume";
@@ -11,4 +12,5 @@ export const Resumos: Record<string, QuizSummary> = {
   "Questions_Irt": resumoIRT,
   "Questions_Ivm": resumoIVM,
   "Questions_Rjfde": resumoRJFDE,
+  "Questions_Cpt": resumoCPT
 } as const;
